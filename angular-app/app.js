@@ -16,7 +16,7 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
                 templateUrl: 'modules/templates/home.html'
             })
             .state('watch', {
-                url: '/watch/:id',
+                url: '/watch/:id/:title',
                 templateUrl: 'modules/templates/watch.html'
             })
 
@@ -38,8 +38,10 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
                 method: 'GET',
                 url: url
             }).then(function successCallback(response) {
+                console.log(response)
                 $rootScope.video = response;
                 $rootScope.video.related = [];
+                $rootScope.video.titleLink = $rootScope.video.data.items[0].snippet.title.replaceAll(' ', '-').replaceAll('/', '');
                 $rootScope.video.src = '//turbopk.net/embed/'+response.data.items[0].id+'?autoplay=1&iv_load_policy=3&modestbranding=0&rel=0&showinfo=0&autohide=1';
                 $rootScope.video.src = $sce.trustAsResourceUrl($rootScope.video.src);
                 getRelatedVideo(response.data.items[0].id);
@@ -57,6 +59,14 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
             }).then(function successCallback(response) {
                 console.log(response)
                 $rootScope.video.related = response.data.items
+                angular.forEach($rootScope.video.related, function(value, key) {
+                    try{
+                        value.titleLink = value.snippet.title.replaceAll(' ', '-').replaceAll('/', '');
+                    }catch(e){
+
+                    }
+                });
+
             }, function errorCallback(response) {
 
             });
@@ -87,7 +97,11 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
         };
     })
     .run(function($rootScope){
-        $rootScope.pageToken = ''
+        $rootScope.pageToken = '';
+        String.prototype.replaceAll = function(search, replacement) {
+            var target = this;
+            return target.split(search).join(replacement);
+        };
     })
     .controller('videoController', ['$scope', '$rootScope', 'Youtube', '$timeout' ,'$http','$stateParams', '$state', function($scope, $rootScope, Youtube, $timeout, $http, $stateParams,$state){
 
@@ -183,6 +197,7 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
                     $rootScope.videoList = data['$$state'].value.items;
                     angular.forEach($rootScope.videoList, function(value, key) {
                         try{
+                            value.titleLink = value.snippet.title.replaceAll(' ', '-').replaceAll('/', '');
                             getView(value.id.videoId)
                         }catch(e){
 

@@ -62,11 +62,11 @@
                 <ul class="nav-sidebar">
                     <li class='video' ng-repeat="vid in video.related track by $index" id='video-{{related.id.videoId}}'>
                         <div class='mediathumb'>
-                            <a ng-href='watch/{{ vid.id.videoId}}' title='{{vid.snippet.description}}'>
+                            <a ng-href='watch/{{vid.id.videoId}}/{{vid.titleLink}}' title='{{vid.snippet.description}}'>
                                 <img ng-src='{{vid.snippet.thumbnails.medium.url}}' alt='{{vid.snippet.title}}'>
                             </a>
                         </div>
-                        <h4><a href='/watch/{{vid.id.videoId}}' title='{{vid.snippet.title}}' class='medialink'>{{vid.snippet.description | cut:true:100:' ...'}} ...</a> <span class='time'>4 months ago </span></h4>
+                        <h4><a ng-href='watch/{{vid.id.videoId}}/{{vid.titleLink}}' title='{{vid.snippet.title}}' class='medialink'>{{vid.snippet.description | cut:true:100:' ...'}} ...</a> <span class='time'>4 months ago </span></h4>
                         <a class='mediaauthor' href=''>by {{vid.snippet.channelTitle}}
                             <span class='time'>{{vid.snippet.publishedAt | timeAgo}} </span>
                         </a>
