@@ -1,54 +1,50 @@
-<section id="media-1xo3af_6_Jk" class="mediapage">
+<section id="media-{{video.data.items[0].id}}" class="mediapage" ng-controller="watchCtrl">
     <div class="container">
         <div class="row">
             <div class="col-md-8 video-content">
                 <div class="video-player">
-                    <iframe width="560" height="315" src="//turbopk.net/embed/1xo3af_6_Jk?autoplay=1&iv_load_policy=3&modestbranding=0&rel=0&showinfo=0&autohide=1" frameborder="0" allowfullscreen></iframe>
+                    <iframe width="560" height="315" src="{{video.src}}" frameborder="0" allowfullscreen></iframe>
                 </div><!--/#video-player -->
                 <div class="video-info" itemscope itemtype="http://schema.org/VideoObject">
                     <div class="row">
                         <div class="col-sm-8">
-                            <h2 itemprop="name">Teaser Trailer: Pirates of the Caribbean: Dead Men Tell No Tales <small>3 days ago </small></h2>
-                            <meta itemprop="thumbnail" content="https://i.ytimg.com/vi/1xo3af_6_Jk/default.jpg" />
+                            <h2 itemprop="name">{{video.data.items[0].snippet.title}} <small>{{video.data.items[0].snippet.publishedAt | timeAgo}} </small></h2>
+                            <meta itemprop="thumbnail" content="{{video.data.items[0].snippet.thumbnails.medium.url}}" />
                         </div>
                         <div class="col-sm-4 stats" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
                             <meta itemprop="ratingValue" content="5" />
                             <meta itemprop="reviewCount" content="117397" />
-                            9, 969, 778 <small>views</small>
+                            {{video.data.items[0].statistics.viewCount | number:0}}<small> views</small>
                             <p>
-                                113, 849 Likes &nbsp;
-                                3, 548 Dislikes
+                                {{video.data.items[0].statistics.likeCount | number:0}} Likes &nbsp;
+                                {{video.data.items[0].statistics.dislikeCount | number:0}} Dislikes
                             </p>
                         </div><!--/.stats -->
                     </div>
                 </div><!--/.video-info -->
                 <div class="video-share row">
                     <div class="col-md-5">
-                        <input type="text" class="form-control" value="http://www.bluerayvids.com/watch/1xo3af_6_Jk">
+                        <input type="text" class="form-control" value="http://www.bluerayvids.com/watch/{{video.data.items[0].id}}">
                     </div>
                     <div class="col-md-7 text-right">
-                        <a href="https://www.facebook.com/sharer.php?u=http://www.bluerayvids.com/watch/1xo3af_6_Jk" class="btn btn-facebook ushare">Share</a>
-                        <a href="https://twitter.com/share?url=http://www.bluerayvids.com/watch/1xo3af_6_Jk&amp;text=Teaser Trailer: Pirates of the Caribbean: Dead Men Tell No Tales" class="btn btn-twitter ushare">Tweet</a>
+                        <a ng-href="https://www.facebook.com/sharer.php?u=http://www.bluerayvids.com/watch/{{video.data.items[0].id}}" class="btn btn-facebook ushare">Share</a>
+                        <a ng-href="https://twitter.com/share?url=http://www.bluerayvids.com/watch/{{video.data.items[0].id}}&amp;text=Teaser Trailer: Pirates of the Caribbean: Dead Men Tell No Tales" class="btn btn-twitter ushare">Tweet</a>
                     </div>
                 </div>
                 <!-- /.video-share -->
                 <div class="video-description">
-                    <p>Pirates of the Caribbean: Dead Men Tell No Tales is in theaters May 2017 in 3D, RealD 3D and IMAX 3D! Watch first look. #APiratesDeathForMe<br />
-                        <br />
-                        Johnny Depp returns to the big screen as the iconic, swashbuckling anti-hero Jack Sparrow in the all-new “Pirates of the Caribbean: Dead Men Tell No Tales.” The rip-roaring adventure finds down-on-his-luck Captain Jack feeling the winds of ill-fortune blowing strongly his way when deadly ghost sailors, led by the terrifying Captain Salazar (Javier Bardem), escape from the Devil's Triangle bent on killing every pirate at sea—notably Jack. Jack's only hope of survival lies in the legendary Trident of Poseidon, but to find it he must forge an uneasy alliance with Carina Smyth (Kaya Scodelario), a brilliant and beautiful astronomer, and Henry (Brenton Thwaites), a headstrong young sailor in the Royal Navy. At the helm of the Dying Gull, his pitifully small and shabby ship, Captain Jack seeks not only to reverse his recent spate of ill fortune, but to save his very life from the most formidable and malicious foe he has ever faced. <br />
-                        <br />
-                        “Pirates of the Caribbean: Dead Men Tell No Tales” also stars Kevin R. McNally as Joshamee Gibbs,  Golshifteh Farahani as the sea-witch Shansa, Stephen Graham as Scrum, David Wenham as Scarfield and Geoffrey Rush as Captain Hector Barbossa.<br />
-                        <br />
-                        Espen Sandberg & Joachim Rønning are directing “Pirates of the Caribbean: Dead Men Tell No Tales” with Jerry Bruckheimer producing. The executive producers are Mike Stenson, Chad Oman, Joe Caracciolo, Jr. and Brigham Taylor. Jeff Nathanson wrote the screenplay. “Pirates of the Caribbean: Dead Men Tell No Tales” drops anchor in U.S. theaters on May 26, 2017.   <br />
-                        <br />
-                        Facebook:<br />
-                        https://www.facebook.com/PiratesoftheCaribbean<br />
-                        <br />
-                        Twitter:<br />
-                        https://twitter.com/DisneyStudios</p>
+                    {{video.data.items[0].snippet.description}}
                 </div>
                 <div id="comments">
                     <h2 class="header">Comments</h2>
+                    <iframe id="f159c0963c9e2b"
+                            name="f2a4d54d9a26cb4"
+                            scrolling="no"
+                            title="Facebook Social Plugin"
+                            class="fb_ltr fb_iframe_widget_lift"
+                            src="https://www.facebook.com/plugins/comments.php?api_key=&amp;channel_url=http%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter%2Fr%2FP5DLcu0KGJB.js%3Fversion%3D42%23cb%3Df11d8c8703f3c98%26domain%3Dwww.bluerayvids.com%26origin%3Dhttp%253A%252F%252Fwww.bluerayvids.com%252Ff2cfe6585cc8ba%26relation%3Dparent.parent&amp;colorscheme=light&amp;href=http%3A%2F%2Fwww.bluerayvids.com%2Fwatch%3F%3DuS0nZt1Rtps&amp;locale=en_US&amp;numposts=4&amp;sdk=joey&amp;skin=light&amp;width=100%25" style="border: none; overflow: hidden; height: 235px; width: 100%;">
+
+                    </iframe>
                     <div id="fb-root"></div>
                     <script>(function(d, s, id) {
                         var js, fjs = d.getElementsByTagName(s)[0];
@@ -57,216 +53,25 @@
                         js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&version=v2.0";
                         fjs.parentNode.insertBefore(js, fjs);
                     }(document, 'script', 'facebook-jssdk'));</script>
-                    <div class="fb-comments" data-href="http://www.bluerayvids.com/watch?=1xo3af_6_Jk" data-num-posts="4" data-width="100%" data-colorscheme="light" ></div>        </div>
+                    <div class="fb-comments" data-href="/watch?={{video.data.items[0].id}}" data-num-posts="4" data-width="100%" data-colorscheme="light" ></div>
+                </div>
                 <!-- /#comments -->
             </div><!--/.content-->
             <div class="col-md-4 video-sidebar">
-
                 <h3>Related Videos</h3>
                 <ul class="nav-sidebar">
-                    <li class='video' id='video-c38r-SAnTWM'>
+                    <li class='video' ng-repeat="vid in video.related track by $index" id='video-{{related.id.videoId}}'>
                         <div class='mediathumb'>
-                            <a href='http://www.bluerayvids.com/watch/c38r-SAnTWM' title='Here’s your first look at Beauty and the Beast, a live-action retelling of the Disney classic🌹Coming to theatres 3.17.17. #BeOurGuest
-
-Disney’s “Beauty and the Beast” is a live-action re-telling of the studio’s animated classic which refashions the classic characters from the tale as old as time for a contemporary audience, staying true to the original music while updating the score with several new songs. “Beauty and the Beast” is the fantastic journey of Belle, a bright, beautiful and independent young woman who is taken prisoner by a beast in his castle. Despite her fears, she befriends the castle’s enchanted staff and learns to look beyond the Beast’s hideous exterior and realize the kind heart and soul of the true Prince within. The film stars: Emma Watson as Belle; Dan Stevens as the Beast; Luke Evans as Gaston, the handsome, but shallow villager who woos Belle; Oscar® winner Kevin Kline as Maurice, Belle’s eccentric, but lovable father; Josh Gad as Lefou, Gaston’s long-suffering aide-de-camp; Golden Globe® nominee Ewan McGregor as Lumiere, the candelabra; Oscar nominee Stanley Tucci as Maestro Cadenza, the harpsichord; Gugu Mbatha-Raw as Plumette, the feather duster; six-time Tony Award® winner Audra McDonald as Madame Garderobe, the wardrobe; Oscar nominee Ian McKellen as Cogsworth, the mantel clock; and two-time Academy Award® winner Emma Thompson as the teapot, Mrs. Potts.
-
-Directed by Oscar® winner Bill Condon from a screenplay by TBD based on the 1991 animated film, the film is produced by Mandeville Films’ David Hoberman and Todd Lieberman with eight-time Oscar-winning composer Alan Menken, who won two Academy Awards® (Best Original Score and Best Song) for the 1991 animated film, providing the score, which will include new recordings of the original songs written by Menken and Howard Ashman, as well as several new songs written by Menken and three-time Oscar winner Tim Rice. “Beauty and the Beast” will be released in U.S. theaters on March 17, 2017.'>
-                                <img src='https://ytimg.googleusercontent.com/vi/c38r-SAnTWM/mqdefault.jpg' alt='Beauty and the Beast Official US Teaser Trailer'>
+                            <a ng-href='watch/{{ vid.id.videoId}}' title='{{vid.snippet.description}}'>
+                                <img ng-src='{{vid.snippet.thumbnails.medium.url}}' alt='{{vid.snippet.title}}'>
                             </a>
                         </div>
-                        <h4><a href='http://www.bluerayvids.com/watch/c38r-SAnTWM' title='Beauty and the Beast Official US Teaser Trailer' class='medialink'>Beauty and the Beast Official US Teaser ...</a> <span class='time'>4 months ago </span></h4>
-                        <a class='mediaauthor' href=''>by Disney Movie Trailers
-                            <span class='time'>4 months ago </span>
+                        <h4><a href='/watch/{{vid.id.videoId}}' title='{{vid.snippet.title}}' class='medialink'>{{vid.snippet.description | cut:true:100:' ...'}} ...</a> <span class='time'>4 months ago </span></h4>
+                        <a class='mediaauthor' href=''>by {{vid.snippet.channelTitle}}
+                            <span class='time'>{{vid.snippet.publishedAt | timeAgo}} </span>
                         </a>
-                    </li><li class='video' id='video-fPOamb6d_20'>
-                    <div class='mediathumb'>
-                        <a href='http://www.bluerayvids.com/watch/fPOamb6d_20' title='Some secrets are too big to keep 🐲 Watch the brand new trailer for Disney’s Pete’s Dragon, starring Bryce Dallas Howard, Robert Redford, and Oakes Fegley. 🐉 See the film when it flies onto the big screen in 3D August 12!
-
-A reimagining of Disney’s cherished family film, “Pete’s Dragon” is the adventure of an orphaned boy named Pete and his best friend Elliott, who just so happens to be a dragon. “Pete’s Dragon” stars Bryce Dallas Howard, Oakes Fegley, Wes Bentley, Karl Urban, Oona Laurence and Oscar® winner Robert Redford. The film, which is directed by David Lower, is written by Lowery & Toby Halbrooks based on a story by Seton I. Miller and S.S. Field and produced by Jim Whitaker, p.g.a., with Barrie M. Osborne serving as executive producer.
-
-For years, old wood carver Mr. Meacham (Robert Redford) has delighted local children with his tales of the fierce dragon that resides deep in the woods of the Pacific Northwest. To his daughter, Grace (Bryce Dallas Howard), who works as a forest ranger, these stories are little more than tall tales…until she meets Pete (Oakes Fegley). Pete is a mysterious 10-year-old with no family and no home who claims to live in the woods with a giant, green dragon named Elliott. And from Pete’s descriptions, Elliott seems remarkably similar to the dragon from Mr. Meacham’s stories. With the help of Natalie (Oona Laurence), an 11-year-old girl whose father Jack (Wes Bentley) owns the local lumber mill, Grace sets out to determine where Pete came from, where he belongs, and the truth about this dragon. Disney’s “Pete’s Dragon” opens in U.S. theaters on August 12, 2016.
-
-Site - Disney.com/petesdragon
-Facebook - https://www.facebook.com/DisneyPetesDragon
-Twitter - https://twitter.com/disneypetes
-Instagram - https://www.instagram.com/disneypetesdragon/'>
-                            <img src='https://ytimg.googleusercontent.com/vi/fPOamb6d_20/mqdefault.jpg' alt='Pete's Dragon - Official US Trailer'>
-                        </a>
-                    </div>
-                    <h4><a href='http://www.bluerayvids.com/watch/fPOamb6d_20' title='Pete's Dragon - Official US Trailer' class='medialink'>Pete's Dragon - Official US Trailer</a> <span class='time'>4 months ago </span></h4>
-                    <a class='mediaauthor' href=''>by Disney Movie Trailers
-                        <span class='time'>4 months ago </span>
-                    </a>
-                </li><li class='video' id='video-y1fZg0hhBX8'>
-                    <div class='mediathumb'>
-                        <a href='http://www.bluerayvids.com/watch/y1fZg0hhBX8' title='Disney's The BFG comes to theaters July 1, 2016!
-
-                           The talents of three of the world’s greatest storytellers – Roald Dahl, Walt Disney and Steven Spielberg –finally unite to bring Dahl’s beloved classic “The BFG” to life. Directed by Spielberg, Disney’s “The BFG” tells the imaginative story of a young girl and the Giant who introduces her to the wonders and perils of Giant Country. The BFG (Mark Rylance), while a giant himself, is a Big Friendly Giant and nothing like the other inhabitants of Giant Country. Standing 24-feet tall with enormous ears and a keen sense of smell, he is endearingly dim-witted and keeps to himself for the most part. Giants like Bloodbottler (Bill Hader) and Fleshlumpeater (Jemaine Clement) on the other hand, are twice as big and at least twice as scary and have been known to eat humans, while the BFG prefers Snozzcumber and Frobscottle. Upon her arrival in Giant Country, Sophie, a precocious 10-year-old girl from London, is initially frightened of the mysterious giant who has brought her to his cave, but soon comes to realize that the BFG is actually quite gentle and charming, and, having never met a giant before, has many questions. The BFG brings Sophie to Dream Country where he collects dreams and sends them to children, teaching her all about the magic and mystery of dreams. Having both been on their own in the world up until now, their affection for one another quickly grows, but Sophie’s presence in Giant Country has attracted the unwanted attention of the other giants, who have become increasingly more bothersome. Sophie and the BFG soon depart for London to see the Queen (Penelope Wilton) and warn her of the precarious giant situation, but they must first convince the Queen and her maid, Mary (Rebecca Hall), that giants do indeed exist. Together, they come up with a plan to get rid of the giants once and for all.
-
-                           Like Disney's The BFG on Facebook:
-                        www.facebook.com/thebfgmovie
-
-                        Follow Disney's The BFG on Twitter:
-                        www.twitter.com/disneystudios
-
-                        Follow Disney's The BFG on Instagram:
-                        https://www.instagram.com/thebfgmovie'>
-                        <img src='https://ytimg.googleusercontent.com/vi/y1fZg0hhBX8/mqdefault.jpg' alt='Disney's The BFG - Official Trailer 2'>
-                        </a>
-                    </div>
-                    <h4><a href='http://www.bluerayvids.com/watch/y1fZg0hhBX8' title='Disney's The BFG - Official Trailer 2' class='medialink'>Disney's The BFG - Official Trailer 2</a> <span class='time'>5 months ago </span></h4>
-                    <a class='mediaauthor' href=''>by Disney Movie Trailers
-                        <span class='time'>5 months ago </span>
-                    </a>
-                </li><li class='video' id='video-mht35L7R65k'>
-                    <div class='mediathumb'>
-                        <a href='http://www.bluerayvids.com/watch/mht35L7R65k' title='Disney's Alice Through The Looking Glass is in theaters May 27!
-
-                           Get tickets now: http://fandan.co/22YfgwU
-
-                        In Disney’s “Alice Through the Looking Glass,” an all-new spectacular adventure featuring the unforgettable characters from Lewis Carroll’s beloved stories, Alice returns to the whimsical world of Underland and travels back in time to save the Mad Hatter. Directed by James Bobin, who brings his own unique vision to the spectacular world Tim Burton created on screen in 2010 with “Alice in Wonderland,” the film is written by Linda Woolverton based on characters created by Lewis Carroll and produced by Joe Roth, Suzanne Todd and Jennifer Todd and Tim Burton with John G. Scotti serving as executive producer. “Alice Through the Looking Glass” reunites the all-star cast from the worldwide blockbuster phenomenon, including: Johnny Depp, Anne Hathaway, Mia Wasikowska and Helena Bonham Carter along with the voices of Alan Rickman, Stephen Fry, Michael Sheen and Timothy Spall. We are also introduced to several new characters: Zanik Hightopp (Rhys Ifans), the Mad Hatter’s father and Time himself (Sacha Baron Cohen), a peculiar creature who is part human, part clock.
-
-                        Follow Disney's Alice Through The Looking Glass on Facebook!
-                        https://www.facebook.com/DisneyAlice
-
-                        Follow Disney's Alice Through The Looking Glass on Twitter!
-                        https://twitter.com/disneystudios
-
-                        Follow Disney's Alice Through The Looking Glass on Instagram!
-                        https://www.instagram.com/disneyalice'>
-                        <img src='https://ytimg.googleusercontent.com/vi/mht35L7R65k/mqdefault.jpg' alt='Alice Through The Looking Glass - "Tea and Time" clip'>
-                        </a>
-                    </div>
-                    <h4><a href='http://www.bluerayvids.com/watch/mht35L7R65k' title='Alice Through The Looking Glass - "Tea and Time" clip' class='medialink'>Alice Through The Looking Glass - "Tea a...</a> <span class='time'>4 months ago </span></h4>
-                    <a class='mediaauthor' href=''>by Disney Movie Trailers
-                        <span class='time'>4 months ago </span>
-                    </a>
-                </li><li class='video' id='video-McPq8FPgl6c'>
-                    <div class='mediathumb'>
-                        <a href='http://www.bluerayvids.com/watch/McPq8FPgl6c' title='Rogue One: A Star Wars Story, in which a group of unlikely heroes band together on a mission to steal the plans to the Death Star, the Empire’s ultimate weapon of destruction. Rogue One: A Star Wars Story arrives in theaters
-December 16, 2016.
-
-[Fan-Made]
-
-This is fan made trailer made by me. In the title, it says "F-M" which stands for "Fan Made" sorry for the inconvenience! I hope you enjoyed my trailer tho!
-
-
-Credits:
-
-All footage belongs to:
-
-Rogue One A Star Wars Story - Teaser Trailer (2016) [HD]
-STAR WARS ROGUE ONE - Ultimate Music Trailer (2016)
-Star Wars: Rogue One (2016)
-Rogue One A Star Wars Story - Teaser Trailer (2016) [HD]
-Confronting The Past - Kylo Ren Faces Darth Vader
-ILMxLAB's Darth Vader VR Story Experience Teaser
-
-                           MUSIC: Something to fight for (Extended Version) - Sencit Music
-                           Rogue One- A Star Wars Story Trailer Music (Recreation-Mockup) (https://www.youtube.com/watch?v=iExKEoOeC1U)
-
-                        No copyright infringement intended.
-
-                        Just a fan-made trailer for the upcoming Star Wars Movies I made for fun!
-
-
-                        Copyright Disclaimer Under Section 107 of the Copyright Act 1976, allowance is made for "fair use" for purposes such as criticism, comment, news reporting, teaching, scholarship, and research. Fair use is a use permitted by copyright statute that might otherwise be infringing. Non-profit, educational or personal use tips the balance in favor of fair use. No copyright infringement intended.'>
-                        <img src='https://ytimg.googleusercontent.com/vi/McPq8FPgl6c/mqdefault.jpg' alt='Star Wars: Rogue One (2016) FINAL TRAILER - Felicity Jones Movie HD [F-M]'>
-                        </a>
-                    </div>
-                    <h4><a href='http://www.bluerayvids.com/watch/McPq8FPgl6c' title='Star Wars: Rogue One (2016) FINAL TRAILER - Felicity Jones Movie HD [F-M]' class='medialink'>Star Wars: Rogue One (2016) FINAL TRAILE...</a> <span class='time'>1 week ago </span></h4>
-                    <a class='mediaauthor' href=''>by TerraStone
-                        <span class='time'>1 week ago </span>
-                    </a>
-                </li><li class='video' id='video-qkeIGJH5XAM'>
-                    <div class='mediathumb'>
-                        <a href='http://www.bluerayvids.com/watch/qkeIGJH5XAM' title='From the guys who brought you American Pie!
-★ The SEXY Trailers are HERE ► https://goo.gl/zJWW0E
-★ Subscribe HERE and NOW ➜ https://goo.gl/6f6iRt
-
-GOOD KIDS follows four overachieving high school students who, upon graduating, realize that they’ve missed out on key life experiences by always following the rules. They decide to reinvent themselves in order to live up their last summer together before college with disastrous consequences.
-
-GOOD KIDS Trailer
-A Movie directed by
-Cast :  Zoey Deutch, Ashley Judd, Virginia Gardner
-Available in theaters and on VOD October 21, 2016
-Genre : Comedy
-
-GOOD KIDS Trailer
-© 2016 - Vertical Entertainment
-
-We keep you in the know!  Find the hottest new trailers and your new destination on these amazing channels you'll LOVE! You'll find the latest...
-
-                        ✓ Horror Flick ➜ https://www.youtube.com/user/SciFiHorrorTrailers
-                        ✓ VideoGame ➜  https://www.youtube.com/user/GameNewsOfficial
-                        ✓ Engaging Indie Movie ➜ https://goo.gl/6NfUzH
-                        ✓ Artsy & unforgettable Documentary ➜ https:// goo.gl/2kTi8D
-                        ✓ Studio Blockbuster ➜ https://www.youtube.com/c/FreshMovieTrailers
-
-                        Subscribe now to catch the best documentaries and movie trailers 2016 and the latest official movie trailer, film clip, scene, review, interview.'>
-                        <img src='https://ytimg.googleusercontent.com/vi/qkeIGJH5XAM/mqdefault.jpg' alt='GOOD KIDS (American Pie Like Comedy, Zoey Deutch) - TRAILER'>
-                        </a>
-                    </div>
-                    <h4><a href='http://www.bluerayvids.com/watch/qkeIGJH5XAM' title='GOOD KIDS (American Pie Like Comedy, Zoey Deutch) - TRAILER' class='medialink'>GOOD KIDS (American Pie Like Comedy, Zoe...</a> <span class='time'>5 days ago </span></h4>
-                    <a class='mediaauthor' href=''>by Fresh Movie Trailers
-                        <span class='time'>5 days ago </span>
-                    </a>
-                </li><li class='video' id='video-wlJIL_3Q_8s'>
-                    <div class='mediathumb'>
-                        <a href='http://www.bluerayvids.com/watch/wlJIL_3Q_8s' title='▶ My 2nd Channel - http://www.youtube.com/JohnFlickster
-▶ My TeePublic Shirts Here - http://bit.ly/29SnUYc
-▶ Deepwater Horizon Review - https://youtu.be/GyLyiHnWdA8
-▶ Like My Facebook -  http://www.facebook.com/JohnFlickster
-▶ Follow Me on Twitter - https://twitter.com/JohnFlickster
-▶ My Instagram - https://instagram.com/theflickpick
-▶ My Shirts & Stuff - http://www.redbubble.com/people/johnflickster
-▶ Business Inquiries - pickflickinger@gmail.com
-
-Flick Pick reaction and review of the new Pirates of the Caribbean 5: Dead Men Tell No Tales teaser trailer. Comes out May 2017.'>
-                            <img src='https://ytimg.googleusercontent.com/vi/wlJIL_3Q_8s/mqdefault.jpg' alt='PIRATES OF THE CARIBBEAN 5: Dead Men Tell No Tales Trailer - Reaction & Review'>
-                        </a>
-                    </div>
-                    <h4><a href='http://www.bluerayvids.com/watch/wlJIL_3Q_8s' title='PIRATES OF THE CARIBBEAN 5: Dead Men Tell No Tales Trailer - Reaction & Review' class='medialink'>PIRATES OF THE CARIBBEAN 5: Dead Men Tel...</a> <span class='time'>2 days ago </span></h4>
-                    <a class='mediaauthor' href=''>by theFLICKpick
-                        <span class='time'>2 days ago </span>
-                    </a>
-                </li><li class='video' id='video-vbNib_NsVRU'>
-                    <div class='mediathumb'>
-                        <a href='http://www.bluerayvids.com/watch/vbNib_NsVRU' title='Birth of the Dragon Trailer - 2016 Bruce Lee Movie
-Subscribe for more: http://www.youtube.com/subscription_center?add_user=NewTrailersBuzz
-
-About Birth of the Dragon
-Young, up-and-coming martial artist, Bruce Lee, challenges legendary kung fu master Wong Jack Man to a no-holds-barred fight in Northern California.
-
-Birth of the Dragon is an upcoming American martial arts biographical drama film directed by George Nolfi and written by Christopher Wilkinson and Stephen J. Rivele. The film stars Billy Magnussen, Philip Ng, and Xia Yu. The true story revolves around the young martial artist Bruce Lee, who challenges kung fu master Wong Jack Man in 1965 in San Francisco.'>
-                            <img src='https://ytimg.googleusercontent.com/vi/vbNib_NsVRU/mqdefault.jpg' alt='BIRTH OF THE DRAGON Trailer (2016) Bruce Lee Movie'>
-                        </a>
-                    </div>
-                    <h4><a href='http://www.bluerayvids.com/watch/vbNib_NsVRU' title='BIRTH OF THE DRAGON Trailer (2016) Bruce Lee Movie' class='medialink'>BIRTH OF THE DRAGON Trailer (2016) Bruce...</a> <span class='time'>3 weeks ago </span></h4>
-                    <a class='mediaauthor' href=''>by New Trailer Buzz
-                        <span class='time'>3 weeks ago </span>
-                    </a>
-                </li><li class='video' id='video-d08PRbzAdDw'>
-                    <div class='mediathumb'>
-                        <a href='http://www.bluerayvids.com/watch/d08PRbzAdDw' title=''>
-                            <img src='https://ytimg.googleusercontent.com/vi/d08PRbzAdDw/mqdefault.jpg' alt='Pirates of the caribbean funny scenes'>
-                        </a>
-                    </div>
-                    <h4><a href='http://www.bluerayvids.com/watch/d08PRbzAdDw' title='Pirates of the caribbean funny scenes' class='medialink'>Pirates of the caribbean funny scenes</a> <span class='time'>7 months ago </span></h4>
-                    <a class='mediaauthor' href=''>by Movie scenes
-                        <span class='time'>7 months ago </span>
-                    </a>
-                </li><li class='video' id='video-KpFMVcZ4o7U'>
-                    <div class='mediathumb'>
-                        <a href='http://www.bluerayvids.com/watch/KpFMVcZ4o7U' title='Pirates of the Caribbean: Dead Men Tell No Tales Teaser Trailer 1 (2017) Johnny Depp Movie HD [Official Trailer]'>
-                            <img src='https://ytimg.googleusercontent.com/vi/KpFMVcZ4o7U/mqdefault.jpg' alt='Pirates of the Caribbean: Dead Men Tell No Tales Official Teaser Trailer #1 (2017) Movie HD'>
-                        </a>
-                    </div>
-                    <h4><a href='http://www.bluerayvids.com/watch/KpFMVcZ4o7U' title='Pirates of the Caribbean: Dead Men Tell No Tales Official Teaser Trailer #1 (2017) Movie HD' class='medialink'>Pirates of the Caribbean: Dead Men Tell ...</a> <span class='time'>3 days ago </span></h4>
-                    <a class='mediaauthor' href=''>by Zero Media
-                        <span class='time'>3 days ago </span>
-                    </a>
-                </li>        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

@@ -1,17 +1,17 @@
-
-    <ul class="media">
-        <li ng-repeat="video in list" class="video" id="video-{{video.id.videoId}}">
-            <div class="mediathumb">
-                <a ng-href="watch/{{video.id.videoId}}" title="{{video.snippet.description}}" >
-                    <img ng-src="{{video.snippet.thumbnails.medium.url}}" alt="{{video.id.videoId}}">
-                </a>
-            </div>
-            <h4>
-             <a ng-href="watch/{{video.id.videoId}}" title="{{video.snippet.description}}" class="medialink">{{video.snippet.description}}</a></h4>
-            <a class="mediaauthor" ng-href="user/{{video.snippet.channelTitle}}">by {{video.snippet.channelTitle}}...
-                <span class="time">{{video.snippet.publishedAt | timeAgo}}</span>
+<ul class="media">
+    <li ng-repeat="video in list" class="video" id="video-{{video.id.videoId}}">
+        <div class="mediathumb">
+            <a ng-href="watch/{{video.id.videoId}}" title="{{video.snippet.description}}">
+                <img ng-src="{{video.snippet.thumbnails.medium.url}}" alt="{{video.id.videoId}}">
             </a>
-            <span class="mediaviews">{{video.statistics.viewCount | number:3}} views</span>
-        </li>
-    </ul>
+        </div>
+        <h4>
+            <a ng-href="watch/{{video.id.videoId}}" title="{{video.snippet.description}}" class="medialink">{{video.snippet.description}}</a>
+        </h4>
+        <a class="mediaauthor" ng-href="user/{{video.snippet.channelTitle}}">by {{video.snippet.channelTitle}}...
+            <span class="time">{{video.snippet.publishedAt | timeAgo}}</span>
+        </a>
+        <span class="mediaviews">{{video.statistics.viewCount | number:3}} views</span>
+    </li>
+</ul>
 

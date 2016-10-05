@@ -30,8 +30,67 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
             'https://www.googleapis.com/auth/userinfo.profile'
         ]
     })
-    .controller('videoController', ['$scope', '$rootScope', 'Youtube', '$timeout' ,'$http','$stateParams', function($scope, $rootScope, Youtube, $timeout, $http, $stateParams){
+    .controller('watchCtrl',['$scope', '$rootScope', '$http','$stateParams','$sce',  function ($scope, $rootScope, $http, $stateParams, $sce) {
+        function getView(video_ID){
+            $rootScope.video = {related:[]};
+            var url = 'https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails,statistics&id='+video_ID+'&key=AIzaSyDf-M6vHleltxG1jZI_PEn1mzdAT2YnEmo';
+            $http({
+                method: 'GET',
+                url: url
+            }).then(function successCallback(response) {
+                $rootScope.video = response;
+                $rootScope.video.related = [];
+                $rootScope.video.src = '//turbopk.net/embed/'+response.data.items[0].id+'?autoplay=1&iv_load_policy=3&modestbranding=0&rel=0&showinfo=0&autohide=1';
+                $rootScope.video.src = $sce.trustAsResourceUrl($rootScope.video.src);
+                getRelatedVideo(response.data.items[0].id);
+
+            }, function errorCallback(response) {
+
+            });
+        }
+        function getRelatedVideo(id){
+            console.log('getRelatedVideo')
+            var url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=20&relatedToVideoId='+id+'&key=AIzaSyDf-M6vHleltxG1jZI_PEn1mzdAT2YnEmo';
+            $http({
+                method: 'GET',
+                url: url
+            }).then(function successCallback(response) {
+                console.log(response)
+                $rootScope.video.related = response.data.items
+            }, function errorCallback(response) {
+
+            });
+        }
+        getView($stateParams.id);
+    }])
+    .filter('cut', function () {
+        return function (value, wordwise, max, tail) {
+            if (!value) return '';
+
+            max = parseInt(max, 10);
+            if (!max) return value;
+            if (value.length <= max) return value;
+
+            value = value.substr(0, max);
+            if (wordwise) {
+                var lastspace = value.lastIndexOf(' ');
+                if (lastspace != -1) {
+                    //Also remove . and , so its gives a cleaner result.
+                    if (value.charAt(lastspace-1) == '.' || value.charAt(lastspace-1) == ',') {
+                        lastspace = lastspace - 1;
+                    }
+                    value = value.substr(0, lastspace);
+                }
+            }
+
+            return value + (tail || ' …');
+        };
+    })
+    .run(function($rootScope){
         $rootScope.pageToken = ''
+    })
+    .controller('videoController', ['$scope', '$rootScope', 'Youtube', '$timeout' ,'$http','$stateParams', '$state', function($scope, $rootScope, Youtube, $timeout, $http, $stateParams,$state){
+
         $rootScope.videoList = [];
         function getView(video_ID){
             var url = 'https://www.googleapis.com/youtube/v3/videos?part=statistics&id='+video_ID+'&key=AIzaSyDf-M6vHleltxG1jZI_PEn1mzdAT2YnEmo';
@@ -55,10 +114,11 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
         }
         $scope.next = function(){
             $rootScope.videoList = [];
-            $scope.videos($stateParams.id ? $stateParams : 'Popular')
+            $scope.videos($stateParams.id ? $stateParams : 22)
         }
         $scope.search = function(q){
             if(event.which === 13 || event.type === "blur") {
+                $state.go('home')
                 var data = Youtube.search({ part: 'snippet', q: event.target.name, maxResults: 20, pageToken: $rootScope.pageToken ? $rootScope.pageToken : '', type : 'video'})
                 $timeout(function(){
                     if(typeof data !="undefined"){
@@ -78,6 +138,44 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
             }
         }
         $scope.videos = function(videoCategoryId){
+            var videoCategoryId = 22
+            switch($stateParams.id){
+                case 'animation':
+                    videoCategoryId = 1;
+                    break;
+                case 'auto-vehicles':
+                    videoCategoryId = 2;
+                    break;
+                case 'comedy':
+                    videoCategoryId = 23;
+                    break;
+                case 'gaming':
+                    videoCategoryId = 20;
+                    break;
+                case 'howto':
+                    videoCategoryId = 26;
+                    break;
+                case 'movies':
+                    videoCategoryId = 30;
+                    break;
+                case 'music':
+                    videoCategoryId = 10;
+                    break;
+                case 'news':
+                    videoCategoryId = 25;
+                    break;
+                case 'people':
+                    videoCategoryId = 22;
+                    break;
+                case 'science':
+                    videoCategoryId = 28;
+                    break;
+                case 'sports':
+                    videoCategoryId = 17;
+                    break;
+                default:
+                    videoCategoryId = 22;
+            }
             var data = Youtube.search({ part: 'snippet', maxResults: 20, pageToken: $rootScope.pageToken ? $rootScope.pageToken : '', type : 'video', videoCategoryId: videoCategoryId })
             $timeout(function(){
                 if(typeof data !="undefined"){
@@ -95,45 +193,7 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
                 }
             },1000)
         }
-        var videoCategoryId = 22
-        switch($stateParams.id){
-            case 'animation':
-                videoCategoryId = 1;
-                break;
-            case 'auto-vehicles':
-                videoCategoryId = 2;
-                break;
-            case 'comedy':
-                videoCategoryId = 23;
-                break;
-            case 'gaming':
-                videoCategoryId = 20;
-                break;
-            case 'howto':
-                videoCategoryId = 26;
-                break;
-            case 'movies':
-                videoCategoryId = 30;
-                break;
-            case 'music':
-                videoCategoryId = 10;
-                break;
-            case 'news':
-                videoCategoryId = 25;
-                break;
-            case 'people':
-                videoCategoryId = 22;
-                break;
-            case 'science':
-                videoCategoryId = 28;
-                break;
-            case 'sports':
-                videoCategoryId = 17;
-                break;
-            default:
-                videoCategoryId = 22;
-        }
-        $scope.videos(videoCategoryId)
+        $scope.videos($stateParams.id ? $stateParams : 22)
 
     }])
     .directive("channelsList",[ function () {
