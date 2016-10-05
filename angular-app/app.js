@@ -1,5 +1,5 @@
 angular.module('angularApp', ['ui.router','ngAnimate'])
-    .config(['$locationProvider', function($locationProvider,$stateProvider) {
+    .config(['$locationProvider','$stateProvider', function($locationProvider,$stateProvider) {
         $locationProvider.html5Mode(true);
 
         $stateProvider
