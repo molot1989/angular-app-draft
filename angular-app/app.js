@@ -1,4 +1,4 @@
-angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22.angular-timeago'])
+angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22.angular-timeago','youtube-embed'])
     .config(['$locationProvider','$stateProvider', function($locationProvider,$stateProvider) {
         $locationProvider.html5Mode(true);
 
@@ -98,7 +98,7 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
     })
     .run(function($rootScope){
         $rootScope.pageToken = '';
-        String.prototype.replaceAll = function(search, replacement) {
+            String.prototype.replaceAll = function(search, replacement) {
             var target = this;
             return target.split(search).join(replacement);
         };
@@ -199,7 +199,7 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
                         try{
                             value.titleLink = value.snippet.title.replaceAll(' ', '-').replaceAll('/', '');
                             getView(value.id.videoId)
-                        }catch(e){
+                       }catch(e){
 
                         }
                     });

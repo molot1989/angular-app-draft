@@ -3,8 +3,11 @@
         <div class="row">
             <div class="col-md-8 video-content">
                 <div class="video-player">
-                    <iframe width="560" height="315" src="{{video.src}}" frameborder="0" allowfullscreen></iframe>
-                </div><!--/#video-player -->
+                    <div class="embed-responsive embed-responsive-16by9">
+                  <youtube-video class="embed-responsive-item" video-id="video.data.items[0].id"></youtube-video>
+                </div>
+                               
+                 </div><!--/#video-player -->
                 <div class="video-info" itemscope itemtype="http://schema.org/VideoObject">
                     <div class="row">
                         <div class="col-sm-8">
