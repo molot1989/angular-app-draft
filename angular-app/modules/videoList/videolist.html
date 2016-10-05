@@ -12,7 +12,7 @@
             <a class="mediaauthor" ng-href="http://www.youtube.com/watch?v={{video.id.videoId}}">by {{video.snippet.channelTitle}}...
                 <span class="time">{{video.snippet.publishedAt | timeAgo}}</span>
             </a>
-            <span class="mediaviews">7, 882, 990 views</span>
+            <span class="mediaviews">{{video.statistics.viewCount | number:3}} views</span>
         </li>
     </ul>
 
