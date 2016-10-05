@@ -40,13 +40,13 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
                 url: url
             }).then(function successCallback(response) {
                 angular.forEach($rootScope.videoList, function(value, key) {
-                     try{           
-                          if(value.id.videoId==response.data.items[0].id){
+                    try{
+                        if(value.id.videoId==response.data.items[0].id){
                             value.statistics = response.data.items[0].statistics;
-                          }
-                        }catch(e){
-
                         }
+                    }catch(e){
+
+                    }
                 });
             }, function errorCallback(response) {
 
@@ -57,8 +57,28 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
             $rootScope.videoList = [];
             $scope.videos($stateParams.id ? $stateParams : 'Popular')
         }
-        $scope.videos = function(q){
-            var data = Youtube.search({ part: 'snippet', q: q, maxResults: 20, pageToken: $rootScope.pageToken ? $rootScope.pageToken : '' })
+        $scope.search = function(q){
+            if(event.which === 13 || event.type === "blur") {
+                var data = Youtube.search({ part: 'snippet', q: event.target.name, maxResults: 20, pageToken: $rootScope.pageToken ? $rootScope.pageToken : '', type : 'video'})
+                $timeout(function(){
+                    if(typeof data !="undefined"){
+                        $rootScope.pageToken = data['$$state'].value.nextPageToken
+                        $rootScope.videoList = data['$$state'].value.items;
+                        angular.forEach($rootScope.videoList, function(value, key) {
+                            try{
+                                getView(value.id.videoId)
+                            }catch(e){
+
+                            }
+                        });
+                        $rootScope.$apply();
+
+                    }
+                },1000)
+            }
+        }
+        $scope.videos = function(videoCategoryId){
+            var data = Youtube.search({ part: 'snippet', maxResults: 20, pageToken: $rootScope.pageToken ? $rootScope.pageToken : '', type : 'video', videoCategoryId: videoCategoryId })
             $timeout(function(){
                 if(typeof data !="undefined"){
                     $rootScope.pageToken = data['$$state'].value.nextPageToken
@@ -75,7 +95,45 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
                 }
             },1000)
         }
-        $scope.videos($stateParams.id ? $stateParams : 'Popular')
+        var videoCategoryId = 22
+        switch($stateParams.id){
+            case 'animation':
+                videoCategoryId = 1;
+                break;
+            case 'auto-vehicles':
+                videoCategoryId = 2;
+                break;
+            case 'comedy':
+                videoCategoryId = 23;
+                break;
+            case 'gaming':
+                videoCategoryId = 20;
+                break;
+            case 'howto':
+                videoCategoryId = 26;
+                break;
+            case 'movies':
+                videoCategoryId = 30;
+                break;
+            case 'music':
+                videoCategoryId = 10;
+                break;
+            case 'news':
+                videoCategoryId = 25;
+                break;
+            case 'people':
+                videoCategoryId = 22;
+                break;
+            case 'science':
+                videoCategoryId = 28;
+                break;
+            case 'sports':
+                videoCategoryId = 17;
+                break;
+            default:
+                videoCategoryId = 22;
+        }
+        $scope.videos(videoCategoryId)
 
     }])
     .directive("channelsList",[ function () {

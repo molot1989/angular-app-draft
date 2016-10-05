@@ -20,9 +20,9 @@
             </div>
             <div class="col-md-6 search">
                 <form id="main-search">
-                    <div class="input-group">
+                    <div class="input-group" ng-controller="videoController">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-                        <input type="text" class="form-control" placeholder="Enter a keyword and press enter" name="q">
+                        <input type="text" class="form-control" placeholder="Enter a keyword and press enter" ng-keypress="search($event)"name="q">
                     </div>
                 </form>
             </div>
