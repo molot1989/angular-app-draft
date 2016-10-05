@@ -1,4 +1,4 @@
-angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22.angular-timeago'])
+angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22.angular-timeago','watchPage'])
     .config(['$locationProvider','$stateProvider', function($locationProvider,$stateProvider) {
         $locationProvider.html5Mode(true);
 
