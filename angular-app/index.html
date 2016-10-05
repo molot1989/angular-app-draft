@@ -3,15 +3,50 @@
 <head>
     <base href="/">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Blue Ray Video</title>
     <!--<link rel="icon" type="image/png" href="favicon.ico"/>-->
-    <link href="build/style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="build/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 </head>
 <body>
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 logo">
+                <button type="button" class="navbar-toggle">
+                    <span class="glyphicon glyphicon-align-justify"></span>
+                </button>
+            </div>
+            <div class="col-md-6 search">
+                <form id="main-search">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                        <input type="text" class="form-control" placeholder="Enter a keyword and press enter" name="q">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-<h1>{{'hello'}}</h1>
+</header>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 sidebar" ng-controller="channelsCtrl">
+                <h3 class="heading">Channels</h3>
+                <div channels-list="items"></div>
+            </div>
+            <div class="col-md-10 content"></div>
+
+        </div>
+    </div>
+</section>
 
 <ui-view></ui-view>
+<footer>
+
+</footer>
 
 <script src="build/app.min.js"></script>
 </body>

@@ -31,6 +31,8 @@ gulp.task('compress', function() {
 gulp.task('watch', function() {
     gulp.watch('modules/styles/*.scss', ['sass']);
     gulp.watch('modules/**/*.js', ['compress']);
+    gulp.watch('app.js', ['compress']);
+
 });
 
 gulp.task('default', ['sass', 'compress', 'watch']);
