@@ -1,4 +1,4 @@
-angular.module('angularApp', ['ui.router','ngAnimate'])
+angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22.angular-timeago'])
     .config(['$locationProvider','$stateProvider', function($locationProvider,$stateProvider) {
         $locationProvider.html5Mode(true);
 
@@ -12,6 +12,31 @@ angular.module('angularApp', ['ui.router','ngAnimate'])
                 templateUrl: 'modules/templates/about.html'
             })
 
+    }])
+    .value('GoogleApp', {
+        apiKey: 'AIzaSyDf-M6vHleltxG1jZI_PEn1mzdAT2YnEmo',
+        clientId: 'foRSlfFamL6agj4aOBKSVz07',
+        scopes: [
+            'https://www.googleapis.com/auth/drive',
+            'https://www.googleapis.com/auth/youtube',
+            'https://www.googleapis.com/auth/userinfo.profile'
+        ]
+    })
+    .controller('videoController', ['$scope', '$rootScope', 'Youtube', '$timeout', function($scope, $rootScope, Youtube, $timeout){
+        $rootScope.videoList = [];
+
+        $scope.videos = function(q){
+            var data = Youtube.search({ part: 'snippet', q: q })
+            $timeout(function(){
+                console.log(data)
+                if(typeof data !="undefined"){
+                    $rootScope.videoList = data['$$state'].value.items;
+                    $rootScope.$apply();
+
+                }
+            },500)
+
+        }
     }])
     .directive("channelsList",[ function () {
         return {

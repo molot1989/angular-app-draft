@@ -1,0 +1,18 @@
+
+    <ul class="media">
+        <li ng-repeat="video in list" class="video" id="video-{{video.id.videoId}}">
+            <div class="mediathumb">
+                <a ng-href="http://www.youtube.com/watch?v={{video.id.videoId}}" title="{{video.snippet.description}}" >
+                    <img ng-src="{{video.snippet.thumbnails.medium.url}}" alt="{{video.id.videoId}}">
+                    <!--<video id="vidTD" width="320" height="240" controls="" poster="{{video.snippet.thumbnails.medium.url}}"></video>-->
+                </a>
+            </div>
+            <h4>
+                <a ng-href="http://www.youtube.com/watch?v={{video.id.videoId}}" title="{{video.snippet.description}}" class="medialink">{{video.snippet.description}}</a></h4>
+            <a class="mediaauthor" ng-href="http://www.youtube.com/watch?v={{video.id.videoId}}">by {{video.snippet.channelTitle}}...
+                <span class="time">{{video.snippet.publishedAt | timeAgo}}</span>
+            </a>
+            <span class="mediaviews">7, 882, 990 views</span>
+        </li>
+    </ul>
+

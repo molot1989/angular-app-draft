@@ -35,9 +35,15 @@
         <div class="row">
             <div class="col-md-2 sidebar" ng-controller="channelsCtrl">
                 <h3 class="heading">Channels</h3>
-                <div channels-list="items"></div>
+                <div channels-list="items">
+
+                </div>
             </div>
-            <div class="col-md-10 content"></div>
+            <div class="col-md-10 content" ng-controller="videoController">
+                <h2 class="header">Popular Videos</h2>
+                <video-list list={{videoList}}></video-list>
+                <button ng-click="videos()">click</button>
+            </div>
 
         </div>
     </div>
@@ -49,5 +55,7 @@
 </footer>
 
 <script src="build/app.min.js"></script>
+<script src="lib/gapi.js"></script>
+<script src="lib/angular-timeago.min.js"></script>
 </body>
 </html>
