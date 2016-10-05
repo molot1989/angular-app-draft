@@ -28,34 +28,16 @@
             </div>
         </div>
     </div>
-
 </header>
-<section>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-2 sidebar" ng-controller="channelsCtrl">
-                <h3 class="heading">Channels</h3>
-                <div channels-list="items">
-
-                </div>
-            </div>
-            <div class="col-md-10 content" ng-controller="videoController">
-                <h2 class="header">Popular Videos</h2>
-                <video-list list={{videoList}}></video-list>
-                <button ng-click="videos()">click</button>
-            </div>
-
-        </div>
-    </div>
-</section>
-
 <ui-view></ui-view>
-<footer>
 
+<footer>
 </footer>
 
 <script src="build/app.min.js"></script>
 <script src="lib/gapi.js"></script>
 <script src="lib/angular-timeago.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+
 </body>
 </html>

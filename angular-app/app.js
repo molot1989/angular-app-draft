@@ -1,4 +1,4 @@
-angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22.angular-timeago','watchPage'])
+angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22.angular-timeago'])
     .config(['$locationProvider','$stateProvider', function($locationProvider,$stateProvider) {
         $locationProvider.html5Mode(true);
 
@@ -7,9 +7,17 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
                 url: '/',
                 templateUrl: 'modules/templates/home.html'
             })
-            .state('about', {
-                url: '/about',
-                templateUrl: 'modules/templates/about.html'
+            .state('user', {
+                url: '/user/:id',
+                templateUrl: 'modules/templates/home.html'
+            })
+            .state('channel', {
+                url: '/channel/:id',
+                templateUrl: 'modules/templates/home.html'
+            })
+            .state('watch', {
+                url: '/watch/:id',
+                templateUrl: 'modules/templates/watch.html'
             })
 
     }])
@@ -22,7 +30,8 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
             'https://www.googleapis.com/auth/userinfo.profile'
         ]
     })
-    .controller('videoController', ['$scope', '$rootScope', 'Youtube', '$timeout' ,'$http', function($scope, $rootScope, Youtube, $timeout, $http){
+    .controller('videoController', ['$scope', '$rootScope', 'Youtube', '$timeout' ,'$http','$stateParams', function($scope, $rootScope, Youtube, $timeout, $http, $stateParams){
+        $rootScope.pageToken = ''
         $rootScope.videoList = [];
         function getView(video_ID){
             var url = 'https://www.googleapis.com/youtube/v3/videos?part=statistics&id='+video_ID+'&key=AIzaSyDf-M6vHleltxG1jZI_PEn1mzdAT2YnEmo';
@@ -31,30 +40,42 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
                 url: url
             }).then(function successCallback(response) {
                 angular.forEach($rootScope.videoList, function(value, key) {
-                    if(value.id.videoId==response.data.items[0].id){
-                        value.statistics = response.data.items[0].statistics;
-                    }
+                     try{           
+                          if(value.id.videoId==response.data.items[0].id){
+                            value.statistics = response.data.items[0].statistics;
+                          }
+                        }catch(e){
+
+                        }
                 });
             }, function errorCallback(response) {
 
             });
 
         }
-
+        $scope.next = function(){
+            $rootScope.videoList = [];
+            $scope.videos($stateParams.id ? $stateParams : 'Popular')
+        }
         $scope.videos = function(q){
-            var data = Youtube.search({ part: 'snippet', q: q })
+            var data = Youtube.search({ part: 'snippet', q: q, maxResults: 20, pageToken: $rootScope.pageToken ? $rootScope.pageToken : '' })
             $timeout(function(){
                 if(typeof data !="undefined"){
+                    $rootScope.pageToken = data['$$state'].value.nextPageToken
                     $rootScope.videoList = data['$$state'].value.items;
                     angular.forEach($rootScope.videoList, function(value, key) {
-                        getView(value.id.videoId)
+                        try{
+                            getView(value.id.videoId)
+                        }catch(e){
+
+                        }
                     });
                     $rootScope.$apply();
 
                 }
-            },500)
-
+            },1000)
         }
+        $scope.videos($stateParams.id ? $stateParams : 'Popular')
 
     }])
     .directive("channelsList",[ function () {
