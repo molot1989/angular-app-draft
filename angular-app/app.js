@@ -311,7 +311,7 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
             angular.forEach($rootScope.videoList, function(value, key) {
                 try{
                     value.titleLink = value.snippet.title.replaceAll(' ', '-').replaceAll('/', '');
-                    getView(value)
+                    getView(value);
                 }catch(e){
 
                 }
