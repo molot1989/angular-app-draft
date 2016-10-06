@@ -46,7 +46,6 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
                 $timeout(function () {
                     $('video').mediaelementplayer({
                         success: function(media, node, player) {
-                            console.log(media.pluginType)
                             $('#' + node.id + '-mode').html('mode: ' + media.pluginType);
                         }
                     });
@@ -57,7 +56,6 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
             });
         }
         function getRelatedVideo(id){
-            console.log('getRelatedVideo')
             var url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=20&relatedToVideoId='+id+'&key=AIzaSyDf-M6vHleltxG1jZI_PEn1mzdAT2YnEmo';
             $http({
                 method: 'GET',
@@ -360,8 +358,6 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
                     data['$$state'].videoCategoryName=videoCategoryName;
                     data['$$state'].videoCategoryid=videoCategory.id;
                     deferred.resolve(data['$$state']);
-                    console.log(data['$$state'])
-
                     clearInterval(getData);
                 }
             },10)
