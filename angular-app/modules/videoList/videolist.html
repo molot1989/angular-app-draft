@@ -1,5 +1,5 @@
 <ul class="media">
-    <li ng-repeat="video in list" class="video" id="video-{{video.id.videoId}}">
+    <li ng-repeat="video in list track by $index" class="video" id="video-{{video.id.videoId}}">
         <div class="mediathumb">
             <a ng-href="watch/{{video.id.videoId}}/{{video.titleLink}}" title="{{video.snippet.description}}">
                 <img ng-src="{{video.snippet.thumbnails.medium.url}}" alt="{{video.id.videoId}}">

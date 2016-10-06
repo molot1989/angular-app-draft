@@ -4,6 +4,7 @@ angular.module('videolist',[])
             restrict: 'E',
             transclude: true,
             replace: true,
+            scope: {},
             templateUrl: '/modules/videoList/videolist.html',
             link: function (scope, element, attrs, $rootScope) {
                 attrs.$observe('list', function(value){

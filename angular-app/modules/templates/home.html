@@ -9,130 +9,34 @@
             </div>
 
             <div class="col-md-10 content col-xs-10" ng-controller="videoController">
-                <h2 class="header"><a ng-href="/channel/{{videoCategoryName}}">{{videoCategoryName}} Videos</a></h2>
-                <ul class="media">
-                    <li ng-repeat="video in videoList" class="video" id="video-{{video.id.videoId}}">
-                        <div class="mediathumb">
-                            <a ng-href="watch/{{video.id.videoId}}/{{video.titleLink}}" title="{{video.snippet.description}}">
-                                <img ng-src="{{video.snippet.thumbnails.medium.url}}" alt="{{video.id.videoId}}">
-                            </a>
-                        </div>
-                        <h4>
-                            <a ng-href="watch/{{video.id.videoId}}/{{video.titleLink}}" title="{{video.snippet.description}}" class="medialink">{{video.snippet.description}}</a>
-                        </h4>
-                        <a class="mediaauthor" ng-href="user/{{video.snippet.channelTitle}}">by {{video.snippet.channelTitle}}...
-                            <span class="time">{{video.snippet.publishedAt | timeAgo}}</span>
-                        </a>
-                        <span class="mediaviews">{{video.statistics.viewCount | number:0}} views</span>
-                    </li>
-                </ul>
-                <h2 class="header"><a ng-href="/channel/{{videoCategoryName2}}">{{videoCategoryName2}} Videos</a></h2>
-                <ul class="media">
-                    <li ng-repeat="video in videoList2" class="video" id="video-{{video.id.videoId}}">
-                        <div class="mediathumb">
-                            <a ng-href="watch/{{video.id.videoId}}/{{video.titleLink}}" title="{{video.snippet.description}}">
-                                <img ng-src="{{video.snippet.thumbnails.medium.url}}" alt="{{video.id.videoId}}">
-                            </a>
-                        </div>
-                        <h4>
-                            <a ng-href="watch/{{video.id.videoId}}/{{video.titleLink}}" title="{{video.snippet.description}}" class="medialink">{{video.snippet.description}}</a>
-                        </h4>
-                        <a class="mediaauthor" ng-href="user/{{video.snippet.channelTitle}}">by {{video.snippet.channelTitle}}...
-                            <span class="time">{{video.snippet.publishedAt | timeAgo}}</span>
-                        </a>
-                        <span class="mediaviews">{{video.statistics.viewCount | number:0}} views</span>
-                    </li>
-                </ul>
-                <h2 class="header"><a ng-href="/channel/{{videoCategoryName3}}">{{videoCategoryName3}} Videos</a></h2>
-                <ul class="media">
-                    <li ng-repeat="video in videoList3" class="video" id="video-{{video.id.videoId}}">
-                        <div class="mediathumb">
-                            <a ng-href="watch/{{video.id.videoId}}/{{video.titleLink}}" title="{{video.snippet.description}}">
-                                <img ng-src="{{video.snippet.thumbnails.medium.url}}" alt="{{video.id.videoId}}">
-                            </a>
-                        </div>
-                        <h4>
-                            <a ng-href="watch/{{video.id.videoId}}/{{video.titleLink}}" title="{{video.snippet.description}}" class="medialink">{{video.snippet.description}}</a>
-                        </h4>
-                        <a class="mediaauthor" ng-href="user/{{video.snippet.channelTitle}}">by {{video.snippet.channelTitle}}...
-                            <span class="time">{{video.snippet.publishedAt | timeAgo}}</span>
-                        </a>
-                        <span class="mediaviews">{{video.statistics.viewCount | number:0}} views</span>
-                    </li>
-                </ul>
-                <h2 class="header"><a ng-href="/channel/{{videoCategoryName4}}">{{videoCategoryName4}} Videos</a></h2>
-                <ul class="media">
-                    <li ng-repeat="video in videoList4" class="video" id="video-{{video.id.videoId}}">
-                        <div class="mediathumb">
-                            <a ng-href="watch/{{video.id.videoId}}/{{video.titleLink}}" title="{{video.snippet.description}}">
-                                <img ng-src="{{video.snippet.thumbnails.medium.url}}" alt="{{video.id.videoId}}">
-                            </a>
-                        </div>
-                        <h4>
-                            <a ng-href="watch/{{video.id.videoId}}/{{video.titleLink}}" title="{{video.snippet.description}}" class="medialink">{{video.snippet.description}}</a>
-                        </h4>
-                        <a class="mediaauthor" ng-href="user/{{video.snippet.channelTitle}}">by {{video.snippet.channelTitle}}...
-                            <span class="time">{{video.snippet.publishedAt | timeAgo}}</span>
-                        </a>
-                        <span class="mediaviews">{{video.statistics.viewCount | number:0}} views</span>
-                    </li>
-                </ul>
-                <h2 class="header"><a ng-href="/channel/{{videoCategoryName5}}">{{videoCategoryName5}} Videos</a></h2>
-                <ul class="media">
-                    <li ng-repeat="video in videoList5" class="video" id="video-{{video.id.videoId}}">
-                        <div class="mediathumb">
-                            <a ng-href="watch/{{video.id.videoId}}/{{video.titleLink}}" title="{{video.snippet.description}}">
-                                <img ng-src="{{video.snippet.thumbnails.medium.url}}" alt="{{video.id.videoId}}">
-                            </a>
-                        </div>
-                        <h4>
-                            <a ng-href="watch/{{video.id.videoId}}/{{video.titleLink}}" title="{{video.snippet.description}}" class="medialink">{{video.snippet.description}}</a>
-                        </h4>
-                        <a class="mediaauthor" ng-href="user/{{video.snippet.channelTitle}}">by {{video.snippet.channelTitle}}...
-                            <span class="time">{{video.snippet.publishedAt | timeAgo}}</span>
-                        </a>
-                        <span class="mediaviews">{{video.statistics.viewCount | number:0}} views</span>
-                    </li>
-                </ul>
-                <h2 class="header"><a ng-href="/channel/{{videoCategoryName6}}">{{videoCategoryName6}} Videos</a></h2>
-                <ul class="media">
-                    <li ng-repeat="video in videoList6" class="video" id="video-{{video.id.videoId}}">
-                        <div class="mediathumb">
-                            <a ng-href="watch/{{video.id.videoId}}/{{video.titleLink}}" title="{{video.snippet.description}}">
-                                <img ng-src="{{video.snippet.thumbnails.medium.url}}" alt="{{video.id.videoId}}">
-                            </a>
-                        </div>
-                        <h4>
-                            <a ng-href="watch/{{video.id.videoId}}/{{video.titleLink}}" title="{{video.snippet.description}}" class="medialink">{{video.snippet.description}}</a>
-                        </h4>
-                        <a class="mediaauthor" ng-href="user/{{video.snippet.channelTitle}}">by {{video.snippet.channelTitle}}...
-                            <span class="time">{{video.snippet.publishedAt | timeAgo}}</span>
-                        </a>
-                        <span class="mediaviews">{{video.statistics.viewCount | number:0}} views</span>
-                    </li>
-                </ul>
-                <h2 class="header"><a ng-href="/channel/{{videoCategoryName7}}">{{videoCategoryName7}} Videos</a></h2>
-                <ul class="media">
-                    <li ng-repeat="video in videoList7" class="video" id="video-{{video.id.videoId}}">
-                        <div class="mediathumb">
-                            <a ng-href="watch/{{video.id.videoId}}/{{video.titleLink}}" title="{{video.snippet.description}}">
-                                <img ng-src="{{video.snippet.thumbnails.medium.url}}" alt="{{video.id.videoId}}">
-                            </a>
-                        </div>
-                        <h4>
-                            <a ng-href="watch/{{video.id.videoId}}/{{video.titleLink}}" title="{{video.snippet.description}}" class="medialink">{{video.snippet.description}}</a>
-                        </h4>
-                        <a class="mediaauthor" ng-href="user/{{video.snippet.channelTitle}}">by {{video.snippet.channelTitle}}...
-                            <span class="time">{{video.snippet.publishedAt | timeAgo}}</span>
-                        </a>
-                        <span class="mediaviews">{{video.statistics.viewCount | number:0}} views</span>
-                    </li>
-                </ul>
-     <!--           <ul class="pager">
+                <h2 class="header"><a ng-href="/channel/{{videoCategoryName[6]}}">{{videoCategoryName[6]}} Videos</a></h2>
+                <video-list list={{videoList[6]}}></video-list>
+
+                <h2 class="header"><a ng-href="/channel/{{videoCategoryName[5]}}">{{videoCategoryName[5]}} Videos</a></h2>
+                <video-list list={{videoList[5]}}></video-list>
+
+                <h2 class="header"><a ng-href="/channel/{{videoCategoryName[4]}}">{{videoCategoryName[4]}} Videos</a></h2>
+                <video-list list={{videoList[4]}}></video-list>
+
+                <h2 class="header"><a ng-href="/channel/{{videoCategoryName[3]}}">{{videoCategoryName[3]}} Videos</a></h2>
+                <video-list list={{videoList[3]}}></video-list>
+
+                <h2 class="header"><a ng-href="/channel/{{videoCategoryName[2]}}">{{videoCategoryName[2]}} Videos</a></h2>
+                <video-list list={{videoList[2]}}></video-list>
+
+                <h2 class="header"><a ng-href="/channel/{{videoCategoryName[1]}}">{{videoCategoryName[1]}} Videos</a></h2>
+                <video-list list={{videoList[1]}}></video-list>
+
+                <h2 class="header"><a ng-href="/channel/{{videoCategoryName[0]}}">{{videoCategoryName[0]}} Videos</a></h2>
+                <video-list list={{videoList[0]}}></video-list>
+
+                <!--
+                <ul class="pager">
                     <li class="next">
                         <a class="next" ng-click="next()">Next</a>
                     </li>
-                </ul>-->
+                </ul>
+                -->
             </div>
         </div>
     </div>
