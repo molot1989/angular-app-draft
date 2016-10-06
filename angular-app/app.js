@@ -101,13 +101,13 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
             return value + (tail || ' …');
         };
     })
-    .run(function($rootScope){
+    .run(['$rootScope', function($rootScope){
         $rootScope.pageToken = '';
             String.prototype.replaceAll = function(search, replacement) {
             var target = this;
             return target.split(search).join(replacement);
         };
-    })
+    }])
     .controller('videoController', ['$scope', '$rootScope', 'Youtube', '$timeout' ,'$http','$stateParams', '$state','$q', function($scope, $rootScope, Youtube, $timeout, $http, $stateParams,$state,$q){
         var arr = [
             {
