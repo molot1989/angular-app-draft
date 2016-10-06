@@ -24,7 +24,7 @@ gulp.task('compress', function() {
         'app.js'
     ])
         .pipe(concat('app.min.js'))
-        .pipe(uglify())
+        //.pipe(uglify())
         .pipe(gulp.dest('build'));
 });
 

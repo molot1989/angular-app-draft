@@ -8,8 +8,8 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
                 templateUrl: 'modules/templates/home.html'
             })
             .state('user', {
-                url: '/user/:id',
-                templateUrl: 'modules/templates/home.html'
+                url: '/user/:id/:title',
+                templateUrl: 'modules/templates/channel.html'
             })
             .state('channel', {
                 url: '/channel/:id',
@@ -108,7 +108,95 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
             return target.split(search).join(replacement);
         };
     }])
-    .controller('videoController', ['$scope', '$rootScope', 'Youtube', '$timeout' ,'$http','$stateParams', '$state','$q', function($scope, $rootScope, Youtube, $timeout, $http, $stateParams,$state,$q){
+    .controller('searchController', ['$scope', '$rootScope', 'Youtube', '$timeout' ,'$http','$stateParams', '$state','$q', function($scope, $rootScope, Youtube, $timeout, $http, $stateParams,$state,$q) {
+        var arr = [
+            {
+                url : 'animation',
+                videoCategoryId: 1,
+                videoCategoryName: 'Film & Animation'
+            },
+            {
+                url : 'auto-vehicles',
+                videoCategoryId: 2,
+                videoCategoryName: 'Autos & Vehicles'
+            },
+            {
+                url : 'comedy',
+                videoCategoryId: 23,
+                videoCategoryName: 'Comedy'
+            },
+            {
+                url : 'gaming',
+                videoCategoryId: 20,
+                videoCategoryName: 'Entertainment'
+            },
+            {
+                url : 'howto',
+                videoCategoryId: 26,
+                videoCategoryName: 'Howto & Style'
+            },
+            {
+                url : 'movies',
+                videoCategoryId: 30,
+                videoCategoryName: 'Movies'
+            },
+            {
+                url : 'music',
+                videoCategoryId: 10,
+                videoCategoryName: 'Music'
+            }
+        ]
+        $rootScope.pageToken=[];
+        $rootScope.videoList=[];
+        $rootScope.videoCategoryName=[];
+        $rootScope.videoCategoryid=[];
+        $rootScope.videoCategoryChannelName='';
+        function getViewChannel(val){
+            var url = 'https://www.googleapis.com/youtube/v3/videos?part=statistics&id='+val.id.videoId+'&key=AIzaSyDf-M6vHleltxG1jZI_PEn1mzdAT2YnEmo';
+            $http({
+                method: 'GET',
+                url: url
+            }).then(function successCallback(response) {
+                angular.forEach($rootScope.videoList, function(value, key) {
+                    try{
+                        if(val.id.videoId == value.id.videoId){
+                            value.statistics = response.data.items[0].statistics;
+                        }
+                    }catch(e){
+
+                    }
+                });
+            }, function errorCallback(response) {
+
+            });
+
+        }
+        $scope.search = function(q){
+            if(event.which === 13 || event.type === "blur") {
+                $state.go('channel')
+                var data = Youtube.search({ part: 'snippet', q: event.target.name, maxResults: 20, pageToken: $rootScope.pageToken ? $rootScope.pageToken : '', type : 'video'})
+                var getData = setInterval(function(){
+                    if(typeof data !="undefined" && data['$$state'].value){
+                        $rootScope.pageToken = data['$$state'].value.nextPageToken
+                        $rootScope.videoList = data['$$state'].value.items;
+                        $rootScope.videoCategoryName = 'Search'
+                        $rootScope.videoCategoryChannelName = 'Search'
+                        angular.forEach($rootScope.videoList, function(value, key) {
+                            try{
+                                getViewChannel(value)
+                            }catch(e){
+
+                            }
+                        });
+                        $rootScope.$apply();
+
+                    }
+                    clearInterval(getData);
+                },10)
+            }
+        }
+    }])
+        .controller('videoController', ['$scope', '$rootScope', 'Youtube', '$timeout' ,'$http','$stateParams', '$state','$q', function($scope, $rootScope, Youtube, $timeout, $http, $stateParams,$state,$q){
         var arr = [
             {
                 url : 'animation',
@@ -265,13 +353,15 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
                     videoCategoryId = 22;
                     videoCategoryName = 'Popular'
             }
-            var data = Youtube.search({ part: 'snippet', maxResults: ($state.current.name == 'channel' ? 20 : 5), pageToken: $rootScope.pageToken ? $rootScope.pageToken : '', type : 'video', videoCategoryId: videoCategoryId })
+            var data = Youtube.search({ part: 'snippet', maxResults: ($state.current.name == 'channel' || $state.current.name == 'user' ? 20 : 5), pageToken: $rootScope.pageToken ? $rootScope.pageToken : '', type : 'video', videoCategoryId: videoCategoryId })
 
             var getData = setInterval(function(){
                 if(typeof data !="undefined" && data['$$state'].value){
                     data['$$state'].videoCategoryName=videoCategoryName;
                     data['$$state'].videoCategoryid=videoCategory.id;
                     deferred.resolve(data['$$state']);
+                    console.log(data['$$state'])
+
                     clearInterval(getData);
                 }
             },10)
@@ -298,7 +388,7 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
 
         }
         $scope.getData = function (arr) {
-            if($state.current.name == 'channel'|| $state.current.name == ''){ return ;}
+            if($state.current.name == 'channel'|| $state.current.name == 'user'|| $state.current.name == ''){ return ;}
             var tmpObj = arr.shift();
             if (typeof tmpObj == 'object') {
                 $scope.videos({id:tmpObj['url']}).then(function (data) {
@@ -324,7 +414,39 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
         $scope.getData(arr);
 
         $scope.videos($stateParams.id ? $stateParams : 22).then(function (data) {
-            if($state.current.name != 'channel' ){ return ;}
+            if($state.current.name != 'channel'){ return ;}
+            $rootScope.pageToken = data.value.nextPageToken
+            $rootScope.videoList = data.value.items;
+            $rootScope.videoCategoryChannelName = data.videoCategoryName;
+            $rootScope.videoCategoryid = data.videoCategoryid;
+            angular.forEach($rootScope.videoList, function(value, key) {
+                try{
+                    value.titleLink = value.snippet.title.replaceAll(' ', '-').replaceAll('/', '');
+                    getViewChannel(value);
+                }catch(e){
+
+                }
+            });
+        })
+        $scope.videosUser = function(channelId){
+            var deferred = $q.defer();
+            var videoCategoryId = 22
+            var videoCategoryName = 'videoCategory'
+            var data = Youtube.search({ part: 'snippet', maxResults: ($state.current.name == 'user' ? 20 : 5), pageToken: $rootScope.pageToken ? $rootScope.pageToken : '', type : 'video', channelId: channelId.id })
+
+            var getData = setInterval(function(){
+                if(typeof data !="undefined" && data['$$state'].value){
+                    if($state.current.name != 'user'){ return ;}
+                    data['$$state'].videoCategoryName=videoCategoryName;
+                    data['$$state'].videoCategoryid=channelId.id;
+                    deferred.resolve(data['$$state']);
+                    clearInterval(getData);
+                }
+            },10)
+            return deferred.promise;
+        }
+        $scope.videosUser($stateParams).then(function (data) {
+            if($state.current.name != 'user'){ return ;}
             $rootScope.pageToken = data.value.nextPageToken
             $rootScope.videoList = data.value.items;
             $rootScope.videoCategoryChannelName = data.videoCategoryName;
