@@ -13,7 +13,7 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
             })
             .state('channel', {
                 url: '/channel/:id',
-                templateUrl: 'modules/templates/home.html'
+                templateUrl: 'modules/templates/channel.html'
             })
             .state('watch', {
                 url: '/watch/:id/:title',
@@ -143,6 +143,7 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
                     if(typeof data !="undefined" && data['$$state'].value){
                         $rootScope.pageToken = data['$$state'].value.nextPageToken
                         $rootScope.videoList = data['$$state'].value.items;
+                        $rootScope.videoCategoryName = 'Search'
                         angular.forEach($rootScope.videoList, function(value, key) {
                             try{
                                 getView(value.id.videoId)
@@ -157,9 +158,10 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
                 },10)
             }
         }
+/*
         $scope.videos = function(videoCategoryId){
             var videoCategoryId = 22
-            switch($stateParams.id){
+            switch(videoCategoryId){
                 case 'animation':
                     videoCategoryId = 1;
                     break;
@@ -207,6 +209,80 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
                             value.titleLink = value.snippet.title.replaceAll(' ', '-').replaceAll('/', '');
                             getView(value.id.videoId)
                        }catch(e){
+
+                        }
+                    });
+                    $rootScope.$apply();
+                    clearInterval(getData);
+                }
+            },10)
+        }
+        $scope.videos($stateParams.id ? $stateParams : 22)
+*/
+        $scope.videos = function(videoCategory){
+            var videoCategoryId = 22
+            var videoCategoryName = 'Popular'
+            switch(videoCategory.id){
+                case 'animation':
+                    videoCategoryId = 1;
+                    videoCategoryName = 'Film & Animation';
+                    break;
+                case 'auto-vehicles':
+                    videoCategoryId = 2;
+                    videoCategoryName = 'Autos & Vehicles';
+                    break;
+                case 'comedy':
+                    videoCategoryId = 23;
+                    videoCategoryName = 'Comedy'
+                    break;
+                case 'gaming':
+                    videoCategoryId = 20;
+                    videoCategoryName = 'Entertainment'
+                    break;
+                case 'howto':
+                    videoCategoryId = 26;
+                    videoCategoryName = 'Howto & Style'
+                    break;
+                case 'movies':
+                    videoCategoryId = 30;
+                    videoCategoryName = 'Movies'
+                    break;
+                case 'music':
+                    videoCategoryId = 10;
+                    videoCategoryName = 'Music'
+                    break;
+                case 'news':
+                    videoCategoryId = 25;
+                    videoCategoryName = 'News & Politics'
+                    break;
+                case 'people':
+                    videoCategoryId = 22;
+                    videoCategoryName = 'Popular'
+                    break;
+                case 'science':
+                    videoCategoryId = 28;
+                    videoCategoryName = 'Science & Technology'
+                    break;
+                case 'sports':
+                    videoCategoryId = 17;
+                    videoCategoryName = 'Sports'
+                    break;
+                default:
+                    videoCategoryId = 22;
+                    videoCategoryName = 'Popular'
+            }
+            var data = Youtube.search({ part: 'snippet', maxResults: 20, pageToken: $rootScope.pageToken ? $rootScope.pageToken : '', type : 'video', videoCategoryId: videoCategoryId })
+
+            var getData = setInterval(function(){
+                if(typeof data !="undefined" && data['$$state'].value){
+                    $rootScope.pageToken = data['$$state'].value.nextPageToken
+                    $rootScope.videoList = data['$$state'].value.items;
+                    $rootScope.videoCategoryName = videoCategoryName;
+                    angular.forEach($rootScope.videoList, function(value, key) {
+                        try{
+                            value.titleLink = value.snippet.title.replaceAll(' ', '-').replaceAll('/', '');
+                            getView(value.id.videoId)
+                        }catch(e){
 
                         }
                     });
