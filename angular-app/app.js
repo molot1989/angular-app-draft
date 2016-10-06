@@ -286,6 +286,7 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
             var getData = setInterval(function(){
                 if(typeof data !="undefined" && data['$$state'].value){
                     data['$$state'].videoCategoryName=videoCategoryName;
+                    data['$$state'].videoCategoryid=videoCategory.id;
                     deferred.resolve(data['$$state']);
                     clearInterval(getData);
                 }
@@ -297,6 +298,7 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
             $rootScope.pageToken = data.value.nextPageToken
             $rootScope.videoList = data.value.items;
             $rootScope.videoCategoryName = data.videoCategoryName;
+            $rootScope.videoCategoryid = data.videoCategoryid;
             angular.forEach($rootScope.videoList, function(value, key) {
                 try{
                     value.titleLink = value.snippet.title.replaceAll(' ', '-').replaceAll('/', '');
@@ -311,6 +313,7 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
             $rootScope.pageToken = data.value.nextPageToken
             $rootScope.videoList = data.value.items;
             $rootScope.videoCategoryName = data.videoCategoryName;
+            $rootScope.videoCategoryid = data.videoCategoryid;
             angular.forEach($rootScope.videoList, function(value, key) {
                 try{
                     value.titleLink = value.snippet.title.replaceAll(' ', '-').replaceAll('/', '');
@@ -325,6 +328,7 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
             $rootScope.pageToken2 = data.value.nextPageToken
             $rootScope.videoList2 = data.value.items;
             $rootScope.videoCategoryName2 = data.videoCategoryName;
+            $rootScope.videoCategoryid2 = data.videoCategoryid;
             angular.forEach($rootScope.videoList2, function(value, key) {
                 try{
                     value.titleLink = value.snippet.title.replaceAll(' ', '-').replaceAll('/', '');
@@ -339,6 +343,7 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
             $rootScope.pageToken3 = data.value.nextPageToken
             $rootScope.videoList3 = data.value.items;
             $rootScope.videoCategoryName3 = data.videoCategoryName;
+            $rootScope.videoCategoryid3 = data.videoCategoryid;
             angular.forEach($rootScope.videoList3, function(value, key) {
                 try{
                     value.titleLink = value.snippet.title.replaceAll(' ', '-').replaceAll('/', '');
@@ -353,6 +358,7 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
             $rootScope.pageToken4 = data.value.nextPageToken
             $rootScope.videoList4 = data.value.items;
             $rootScope.videoCategoryName4 = data.videoCategoryName;
+            $rootScope.videoCategoryid4 = data.videoCategoryid;
             angular.forEach($rootScope.videoList4, function(value, key) {
                 try{
                     value.titleLink = value.snippet.title.replaceAll(' ', '-').replaceAll('/', '');
@@ -367,6 +373,7 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
             $rootScope.pageToken5 = data.value.nextPageToken
             $rootScope.videoList5 = data.value.items;
             $rootScope.videoCategoryName5 = data.videoCategoryName;
+            $rootScope.videoCategoryid5 = data.videoCategoryid;
             angular.forEach($rootScope.videoList5, function(value, key) {
                 try{
                     value.titleLink = value.snippet.title.replaceAll(' ', '-').replaceAll('/', '');
@@ -381,6 +388,7 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
             $rootScope.pageToken6 = data.value.nextPageToken
             $rootScope.videoList6 = data.value.items;
             $rootScope.videoCategoryName6 = data.videoCategoryName;
+            $rootScope.videoCategoryid6 = data.videoCategoryid;
             angular.forEach($rootScope.videoList6, function(value, key) {
                 try{
                     value.titleLink = value.snippet.title.replaceAll(' ', '-').replaceAll('/', '');
@@ -395,6 +403,7 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
             $rootScope.pageToken7 = data.value.nextPageToken
             $rootScope.videoList7 = data.value.items;
             $rootScope.videoCategoryName7 = data.videoCategoryName;
+            $rootScope.videoCategoryid7 = data.videoCategoryid;
             angular.forEach($rootScope.videoList7, function(value, key) {
                 try{
                     value.titleLink = value.snippet.title.replaceAll(' ', '-').replaceAll('/', '');

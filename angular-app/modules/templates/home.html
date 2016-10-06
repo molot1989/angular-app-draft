@@ -9,7 +9,7 @@
             </div>
 
             <div class="col-md-10 content col-xs-10" ng-controller="videoController">
-                <h2 class="header">{{videoCategoryName}} Videos</h2>
+                <h2 class="header"><a ng-href="/channel/{{videoCategoryName}}">{{videoCategoryName}} Videos</a></h2>
                 <ul class="media">
                     <li ng-repeat="video in videoList" class="video" id="video-{{video.id.videoId}}">
                         <div class="mediathumb">
@@ -26,7 +26,7 @@
                         <span class="mediaviews">{{video.statistics.viewCount | number:0}} views</span>
                     </li>
                 </ul>
-                <h2 class="header">{{videoCategoryName2}} Videos</h2>
+                <h2 class="header"><a ng-href="/channel/{{videoCategoryName2}}">{{videoCategoryName2}} Videos</a></h2>
                 <ul class="media">
                     <li ng-repeat="video in videoList2" class="video" id="video-{{video.id.videoId}}">
                         <div class="mediathumb">
@@ -43,7 +43,7 @@
                         <span class="mediaviews">{{video.statistics.viewCount | number:0}} views</span>
                     </li>
                 </ul>
-                <h2 class="header">{{videoCategoryName3}} Videos</h2>
+                <h2 class="header"><a ng-href="/channel/{{videoCategoryName3}}">{{videoCategoryName3}} Videos</a></h2>
                 <ul class="media">
                     <li ng-repeat="video in videoList3" class="video" id="video-{{video.id.videoId}}">
                         <div class="mediathumb">
@@ -60,7 +60,7 @@
                         <span class="mediaviews">{{video.statistics.viewCount | number:0}} views</span>
                     </li>
                 </ul>
-                <h2 class="header">{{videoCategoryName4}} Videos</h2>
+                <h2 class="header"><a ng-href="/channel/{{videoCategoryName4}}">{{videoCategoryName4}} Videos</a></h2>
                 <ul class="media">
                     <li ng-repeat="video in videoList4" class="video" id="video-{{video.id.videoId}}">
                         <div class="mediathumb">
@@ -77,7 +77,7 @@
                         <span class="mediaviews">{{video.statistics.viewCount | number:0}} views</span>
                     </li>
                 </ul>
-                <h2 class="header">{{videoCategoryName5}} Videos</h2>
+                <h2 class="header"><a ng-href="/channel/{{videoCategoryName5}}">{{videoCategoryName5}} Videos</a></h2>
                 <ul class="media">
                     <li ng-repeat="video in videoList5" class="video" id="video-{{video.id.videoId}}">
                         <div class="mediathumb">
@@ -94,7 +94,7 @@
                         <span class="mediaviews">{{video.statistics.viewCount | number:0}} views</span>
                     </li>
                 </ul>
-                <h2 class="header">{{videoCategoryName6}} Videos</h2>
+                <h2 class="header"><a ng-href="/channel/{{videoCategoryName6}}">{{videoCategoryName6}} Videos</a></h2>
                 <ul class="media">
                     <li ng-repeat="video in videoList6" class="video" id="video-{{video.id.videoId}}">
                         <div class="mediathumb">
@@ -111,7 +111,7 @@
                         <span class="mediaviews">{{video.statistics.viewCount | number:0}} views</span>
                     </li>
                 </ul>
-                <h2 class="header">{{videoCategoryName7}} Videos</h2>
+                <h2 class="header"><a ng-href="/channel/{{videoCategoryName7}}">{{videoCategoryName7}} Videos</a></h2>
                 <ul class="media">
                     <li ng-repeat="video in videoList7" class="video" id="video-{{video.id.videoId}}">
                         <div class="mediathumb">
