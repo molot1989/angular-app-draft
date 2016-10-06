@@ -108,20 +108,17 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
             return target.split(search).join(replacement);
         };
     })
-    .controller('videoController', ['$scope', '$rootScope', 'Youtube', '$timeout' ,'$http','$stateParams', '$state', function($scope, $rootScope, Youtube, $timeout, $http, $stateParams,$state){
-
+    .controller('videoController', ['$scope', '$rootScope', 'Youtube', '$timeout' ,'$http','$stateParams', '$state','$q', function($scope, $rootScope, Youtube, $timeout, $http, $stateParams,$state,$q){
         $rootScope.videoList = [];
-        function getView(video_ID){
-            var url = 'https://www.googleapis.com/youtube/v3/videos?part=statistics&id='+video_ID+'&key=AIzaSyDf-M6vHleltxG1jZI_PEn1mzdAT2YnEmo';
+        function getView(value){
+            var url = 'https://www.googleapis.com/youtube/v3/videos?part=statistics&id='+value.id.videoId+'&key=AIzaSyDf-M6vHleltxG1jZI_PEn1mzdAT2YnEmo';
             $http({
                 method: 'GET',
                 url: url
             }).then(function successCallback(response) {
-                angular.forEach($rootScope.videoList, function(value, key) {
+                angular.forEach(value, function(value, key) {
                     try{
-                        if(value.id.videoId==response.data.items[0].id){
-                            value.statistics = response.data.items[0].statistics;
-                        }
+                        value.statistics = response.data.items[0].statistics;
                     }catch(e){
 
                     }
@@ -133,7 +130,19 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
         }
         $scope.next = function(){
             $rootScope.videoList = [];
-            $scope.videos($stateParams.id ? $stateParams : 22)
+            $scope.videos($stateParams.id ? $stateParams : 22).then(function (data) {
+                $rootScope.pageToken = data.value.nextPageToken
+                $rootScope.videoList = data.value.items;
+                $rootScope.videoCategoryName = data.videoCategoryName;
+                angular.forEach($rootScope.videoList, function(value, key) {
+                    try{
+                        value.titleLink = value.snippet.title.replaceAll(' ', '-').replaceAll('/', '');
+                        getView(value)
+                    }catch(e){
+
+                    }
+                });
+            })
         }
         $scope.search = function(q){
             if(event.which === 13 || event.type === "blur") {
@@ -146,7 +155,7 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
                         $rootScope.videoCategoryName = 'Search'
                         angular.forEach($rootScope.videoList, function(value, key) {
                             try{
-                                getView(value.id.videoId)
+                                getView(value)
                             }catch(e){
 
                             }
@@ -220,6 +229,7 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
         $scope.videos($stateParams.id ? $stateParams : 22)
 */
         $scope.videos = function(videoCategory){
+            var deferred = $q.defer();
             var videoCategoryId = 22
             var videoCategoryName = 'Popular'
             switch(videoCategory.id){
@@ -271,27 +281,129 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
                     videoCategoryId = 22;
                     videoCategoryName = 'Popular'
             }
-            var data = Youtube.search({ part: 'snippet', maxResults: 20, pageToken: $rootScope.pageToken ? $rootScope.pageToken : '', type : 'video', videoCategoryId: videoCategoryId })
+            var data = Youtube.search({ part: 'snippet', maxResults: ($state.current.name == 'channel' ? 20 : 5), pageToken: $rootScope.pageToken ? $rootScope.pageToken : '', type : 'video', videoCategoryId: videoCategoryId })
 
             var getData = setInterval(function(){
                 if(typeof data !="undefined" && data['$$state'].value){
-                    $rootScope.pageToken = data['$$state'].value.nextPageToken
-                    $rootScope.videoList = data['$$state'].value.items;
-                    $rootScope.videoCategoryName = videoCategoryName;
-                    angular.forEach($rootScope.videoList, function(value, key) {
-                        try{
-                            value.titleLink = value.snippet.title.replaceAll(' ', '-').replaceAll('/', '');
-                            getView(value.id.videoId)
-                        }catch(e){
-
-                        }
-                    });
-                    $rootScope.$apply();
+                    data['$$state'].videoCategoryName=videoCategoryName;
+                    deferred.resolve(data['$$state']);
                     clearInterval(getData);
                 }
             },10)
+            return deferred.promise;
         }
-        $scope.videos($stateParams.id ? $stateParams : 22)
+        $scope.videos($stateParams.id ? $stateParams : 22).then(function (data) {
+            if($state.current.name != 'channel'){ return ;}
+            $rootScope.pageToken = data.value.nextPageToken
+            $rootScope.videoList = data.value.items;
+            $rootScope.videoCategoryName = data.videoCategoryName;
+            angular.forEach($rootScope.videoList, function(value, key) {
+                try{
+                    value.titleLink = value.snippet.title.replaceAll(' ', '-').replaceAll('/', '');
+                    getView(value)
+                }catch(e){
+
+                }
+            });
+        })
+        $scope.videos({id:'animation'}).then(function (data) {
+            if($state.current.name == 'channel'){ return ;}
+            $rootScope.pageToken = data.value.nextPageToken
+            $rootScope.videoList = data.value.items;
+            $rootScope.videoCategoryName = data.videoCategoryName;
+            angular.forEach($rootScope.videoList, function(value, key) {
+                try{
+                    value.titleLink = value.snippet.title.replaceAll(' ', '-').replaceAll('/', '');
+                    getView(value)
+                }catch(e){
+
+                }
+            });
+        })
+        $scope.videos({id:'auto-vehicles'}).then(function (data) {
+            if($state.current.name == 'channel'){ return ;}
+            $rootScope.pageToken2 = data.value.nextPageToken
+            $rootScope.videoList2 = data.value.items;
+            $rootScope.videoCategoryName2 = data.videoCategoryName;
+            angular.forEach($rootScope.videoList2, function(value, key) {
+                try{
+                    value.titleLink = value.snippet.title.replaceAll(' ', '-').replaceAll('/', '');
+                    getView(value)
+                }catch(e){
+
+                }
+            });
+        })
+        $scope.videos({id:'comedy'}).then(function (data) {
+            if($state.current.name == 'channel'){ return ;}
+            $rootScope.pageToken3 = data.value.nextPageToken
+            $rootScope.videoList3 = data.value.items;
+            $rootScope.videoCategoryName3 = data.videoCategoryName;
+            angular.forEach($rootScope.videoList3, function(value, key) {
+                try{
+                    value.titleLink = value.snippet.title.replaceAll(' ', '-').replaceAll('/', '');
+                    getView(value)
+                }catch(e){
+
+                }
+            });
+        })
+        $scope.videos({id:'gaming'}).then(function (data) {
+            if($state.current.name == 'channel'){ return ;}
+            $rootScope.pageToken4 = data.value.nextPageToken
+            $rootScope.videoList4 = data.value.items;
+            $rootScope.videoCategoryName4 = data.videoCategoryName;
+            angular.forEach($rootScope.videoList4, function(value, key) {
+                try{
+                    value.titleLink = value.snippet.title.replaceAll(' ', '-').replaceAll('/', '');
+                    getView(value)
+                }catch(e){
+
+                }
+            });
+        })
+        $scope.videos({id:'howto'}).then(function (data) {
+            if($state.current.name == 'channel'){ return ;}
+            $rootScope.pageToken5 = data.value.nextPageToken
+            $rootScope.videoList5 = data.value.items;
+            $rootScope.videoCategoryName5 = data.videoCategoryName;
+            angular.forEach($rootScope.videoList5, function(value, key) {
+                try{
+                    value.titleLink = value.snippet.title.replaceAll(' ', '-').replaceAll('/', '');
+                    getView(value)
+                }catch(e){
+
+                }
+            });
+        })
+        $scope.videos({id:'movies'}).then(function (data) {
+            if($state.current.name == 'channel'){ return ;}
+            $rootScope.pageToken6 = data.value.nextPageToken
+            $rootScope.videoList6 = data.value.items;
+            $rootScope.videoCategoryName6 = data.videoCategoryName;
+            angular.forEach($rootScope.videoList6, function(value, key) {
+                try{
+                    value.titleLink = value.snippet.title.replaceAll(' ', '-').replaceAll('/', '');
+                    getView(value)
+                }catch(e){
+
+                }
+            });
+        })
+        $scope.videos({id:'music'}).then(function (data) {
+            if($state.current.name == 'channel'){ return ;}
+            $rootScope.pageToken7 = data.value.nextPageToken
+            $rootScope.videoList7 = data.value.items;
+            $rootScope.videoCategoryName7 = data.videoCategoryName;
+            angular.forEach($rootScope.videoList7, function(value, key) {
+                try{
+                    value.titleLink = value.snippet.title.replaceAll(' ', '-').replaceAll('/', '');
+                    getView(value)
+                }catch(e){
+
+                }
+            });
+        })
 
     }])
     .directive("channelsList",[ function () {

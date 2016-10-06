@@ -10,12 +10,129 @@
 
             <div class="col-md-10 content col-xs-10" ng-controller="videoController">
                 <h2 class="header">{{videoCategoryName}} Videos</h2>
-                <video-list list={{videoList}}></video-list>
-                <ul class="pager">
+                <ul class="media">
+                    <li ng-repeat="video in videoList" class="video" id="video-{{video.id.videoId}}">
+                        <div class="mediathumb">
+                            <a ng-href="watch/{{video.id.videoId}}/{{video.titleLink}}" title="{{video.snippet.description}}">
+                                <img ng-src="{{video.snippet.thumbnails.medium.url}}" alt="{{video.id.videoId}}">
+                            </a>
+                        </div>
+                        <h4>
+                            <a ng-href="watch/{{video.id.videoId}}/{{video.titleLink}}" title="{{video.snippet.description}}" class="medialink">{{video.snippet.description}}</a>
+                        </h4>
+                        <a class="mediaauthor" ng-href="user/{{video.snippet.channelTitle}}">by {{video.snippet.channelTitle}}...
+                            <span class="time">{{video.snippet.publishedAt | timeAgo}}</span>
+                        </a>
+                        <span class="mediaviews">{{video.statistics.viewCount | number:0}} views</span>
+                    </li>
+                </ul>
+                <h2 class="header">{{videoCategoryName2}} Videos</h2>
+                <ul class="media">
+                    <li ng-repeat="video in videoList2" class="video" id="video-{{video.id.videoId}}">
+                        <div class="mediathumb">
+                            <a ng-href="watch/{{video.id.videoId}}/{{video.titleLink}}" title="{{video.snippet.description}}">
+                                <img ng-src="{{video.snippet.thumbnails.medium.url}}" alt="{{video.id.videoId}}">
+                            </a>
+                        </div>
+                        <h4>
+                            <a ng-href="watch/{{video.id.videoId}}/{{video.titleLink}}" title="{{video.snippet.description}}" class="medialink">{{video.snippet.description}}</a>
+                        </h4>
+                        <a class="mediaauthor" ng-href="user/{{video.snippet.channelTitle}}">by {{video.snippet.channelTitle}}...
+                            <span class="time">{{video.snippet.publishedAt | timeAgo}}</span>
+                        </a>
+                        <span class="mediaviews">{{video.statistics.viewCount | number:0}} views</span>
+                    </li>
+                </ul>
+                <h2 class="header">{{videoCategoryName3}} Videos</h2>
+                <ul class="media">
+                    <li ng-repeat="video in videoList3" class="video" id="video-{{video.id.videoId}}">
+                        <div class="mediathumb">
+                            <a ng-href="watch/{{video.id.videoId}}/{{video.titleLink}}" title="{{video.snippet.description}}">
+                                <img ng-src="{{video.snippet.thumbnails.medium.url}}" alt="{{video.id.videoId}}">
+                            </a>
+                        </div>
+                        <h4>
+                            <a ng-href="watch/{{video.id.videoId}}/{{video.titleLink}}" title="{{video.snippet.description}}" class="medialink">{{video.snippet.description}}</a>
+                        </h4>
+                        <a class="mediaauthor" ng-href="user/{{video.snippet.channelTitle}}">by {{video.snippet.channelTitle}}...
+                            <span class="time">{{video.snippet.publishedAt | timeAgo}}</span>
+                        </a>
+                        <span class="mediaviews">{{video.statistics.viewCount | number:0}} views</span>
+                    </li>
+                </ul>
+                <h2 class="header">{{videoCategoryName4}} Videos</h2>
+                <ul class="media">
+                    <li ng-repeat="video in videoList4" class="video" id="video-{{video.id.videoId}}">
+                        <div class="mediathumb">
+                            <a ng-href="watch/{{video.id.videoId}}/{{video.titleLink}}" title="{{video.snippet.description}}">
+                                <img ng-src="{{video.snippet.thumbnails.medium.url}}" alt="{{video.id.videoId}}">
+                            </a>
+                        </div>
+                        <h4>
+                            <a ng-href="watch/{{video.id.videoId}}/{{video.titleLink}}" title="{{video.snippet.description}}" class="medialink">{{video.snippet.description}}</a>
+                        </h4>
+                        <a class="mediaauthor" ng-href="user/{{video.snippet.channelTitle}}">by {{video.snippet.channelTitle}}...
+                            <span class="time">{{video.snippet.publishedAt | timeAgo}}</span>
+                        </a>
+                        <span class="mediaviews">{{video.statistics.viewCount | number:0}} views</span>
+                    </li>
+                </ul>
+                <h2 class="header">{{videoCategoryName5}} Videos</h2>
+                <ul class="media">
+                    <li ng-repeat="video in videoList5" class="video" id="video-{{video.id.videoId}}">
+                        <div class="mediathumb">
+                            <a ng-href="watch/{{video.id.videoId}}/{{video.titleLink}}" title="{{video.snippet.description}}">
+                                <img ng-src="{{video.snippet.thumbnails.medium.url}}" alt="{{video.id.videoId}}">
+                            </a>
+                        </div>
+                        <h4>
+                            <a ng-href="watch/{{video.id.videoId}}/{{video.titleLink}}" title="{{video.snippet.description}}" class="medialink">{{video.snippet.description}}</a>
+                        </h4>
+                        <a class="mediaauthor" ng-href="user/{{video.snippet.channelTitle}}">by {{video.snippet.channelTitle}}...
+                            <span class="time">{{video.snippet.publishedAt | timeAgo}}</span>
+                        </a>
+                        <span class="mediaviews">{{video.statistics.viewCount | number:0}} views</span>
+                    </li>
+                </ul>
+                <h2 class="header">{{videoCategoryName6}} Videos</h2>
+                <ul class="media">
+                    <li ng-repeat="video in videoList6" class="video" id="video-{{video.id.videoId}}">
+                        <div class="mediathumb">
+                            <a ng-href="watch/{{video.id.videoId}}/{{video.titleLink}}" title="{{video.snippet.description}}">
+                                <img ng-src="{{video.snippet.thumbnails.medium.url}}" alt="{{video.id.videoId}}">
+                            </a>
+                        </div>
+                        <h4>
+                            <a ng-href="watch/{{video.id.videoId}}/{{video.titleLink}}" title="{{video.snippet.description}}" class="medialink">{{video.snippet.description}}</a>
+                        </h4>
+                        <a class="mediaauthor" ng-href="user/{{video.snippet.channelTitle}}">by {{video.snippet.channelTitle}}...
+                            <span class="time">{{video.snippet.publishedAt | timeAgo}}</span>
+                        </a>
+                        <span class="mediaviews">{{video.statistics.viewCount | number:0}} views</span>
+                    </li>
+                </ul>
+                <h2 class="header">{{videoCategoryName7}} Videos</h2>
+                <ul class="media">
+                    <li ng-repeat="video in videoList7" class="video" id="video-{{video.id.videoId}}">
+                        <div class="mediathumb">
+                            <a ng-href="watch/{{video.id.videoId}}/{{video.titleLink}}" title="{{video.snippet.description}}">
+                                <img ng-src="{{video.snippet.thumbnails.medium.url}}" alt="{{video.id.videoId}}">
+                            </a>
+                        </div>
+                        <h4>
+                            <a ng-href="watch/{{video.id.videoId}}/{{video.titleLink}}" title="{{video.snippet.description}}" class="medialink">{{video.snippet.description}}</a>
+                        </h4>
+                        <a class="mediaauthor" ng-href="user/{{video.snippet.channelTitle}}">by {{video.snippet.channelTitle}}...
+                            <span class="time">{{video.snippet.publishedAt | timeAgo}}</span>
+                        </a>
+                        <span class="mediaviews">{{video.statistics.viewCount | number:0}} views</span>
+                    </li>
+                </ul>
+     <!--           <ul class="pager">
                     <li class="next">
                         <a class="next" ng-click="next()">Next</a>
                     </li>
-                </ul>
+                </ul>-->
             </div>
         </div>
     </div>
