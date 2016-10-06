@@ -431,7 +431,7 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
         $scope.videosUser = function(channelId){
             var deferred = $q.defer();
             var videoCategoryId = 22
-            var videoCategoryName = 'videoCategory'
+            var videoCategoryName = 'User'
             var data = Youtube.search({ part: 'snippet', maxResults: ($state.current.name == 'user' ? 20 : 5), pageToken: $rootScope.pageToken ? $rootScope.pageToken : '', type : 'video', channelId: channelId.id })
 
             var getData = setInterval(function(){
