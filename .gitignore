@@ -1,1 +1,5 @@
 angular-app/node_modules
+.DS_Store
+.idea/workspace.xml
+angular-app/.idea/
+.idea/
