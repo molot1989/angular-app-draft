@@ -200,7 +200,7 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
                         $rootScope.videoCategoryChannelName = 'Search'
                         angular.forEach($rootScope.videoList, function(value, key) {
                             try{
-                                getView(value)
+                                getViewChannel(value)
                             }catch(e){
 
                             }
