@@ -1,14 +1,14 @@
 <section>
     <div class="container">
         <div class="row">
-            <div class="col-md-2 sidebar" ng-controller="channelsCtrl">
+            <div class="col-md-2 sidebar col-xs-2" ng-controller="channelsCtrl">
                 <h3 class="heading">Channels</h3>
                 <div channels-list="items">
 
                 </div>
             </div>
 
-            <div class="col-md-10 content" ng-controller="videoController">
+            <div class="col-md-10 content col-xs-10" ng-controller="videoController">
                 <h2 class="header">{{videoCategoryName}} Videos</h2>
                 <video-list list={{videoList}}></video-list>
                 <ul class="pager">
