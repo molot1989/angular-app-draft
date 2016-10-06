@@ -4,10 +4,10 @@
             <div class="col-md-8 video-content">
                 <div class="video-player">
                     <div class="embed-responsive embed-responsive-16by9">
-                        <iframe width="560" height="315" src="{{video.src}}" frameborder="0" allowfullscreen></iframe>
-
+                        <video width="800" height="450" id="player1">
+                            <source type="video/youtube" ng-src="{{video.src}}" />
+                        </video>
                     </div>
-                               
                  </div><!--/#video-player -->
                 <div class="video-info" itemscope itemtype="http://schema.org/VideoObject">
                     <div class="row">

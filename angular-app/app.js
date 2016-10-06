@@ -1,4 +1,4 @@
-angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22.angular-timeago','youtube-embed'])
+angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22.angular-timeago'])
     .config(['$locationProvider','$stateProvider', function($locationProvider,$stateProvider) {
         $locationProvider.html5Mode(true);
 
@@ -30,7 +30,7 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
             'https://www.googleapis.com/auth/userinfo.profile'
         ]
     })
-    .controller('watchCtrl',['$scope', '$rootScope', '$http','$stateParams','$sce',  function ($scope, $rootScope, $http, $stateParams, $sce) {
+    .controller('watchCtrl',['$scope', '$rootScope', '$http','$stateParams','$sce', '$timeout',  function ($scope, $rootScope, $http, $stateParams, $sce, $timeout) {
         function getView(video_ID){
             $rootScope.video = {related:[]};
             var url = 'https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails,statistics&id='+video_ID+'&key=AIzaSyDf-M6vHleltxG1jZI_PEn1mzdAT2YnEmo';
@@ -38,14 +38,20 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
                 method: 'GET',
                 url: url
             }).then(function successCallback(response) {
-                console.log(response)
                 $rootScope.video = response;
                 $rootScope.video.related = [];
                 $rootScope.video.titleLink = $rootScope.video.data.items[0].snippet.title.replaceAll(' ', '-').replaceAll('/', '');
-                $rootScope.video.src = '//turbopk.net/embed/'+response.data.items[0].id+'?autoplay=1&iv_load_policy=3&modestbranding=0&rel=0&showinfo=0&autohide=1';
+                $rootScope.video.src = 'https://www.youtube.com/watch?v='+response.data.items[0].id;
                 $rootScope.video.src = $sce.trustAsResourceUrl($rootScope.video.src);
+                $timeout(function () {
+                    $('video').mediaelementplayer({
+                        success: function(media, node, player) {
+                            console.log(media.pluginType)
+                            $('#' + node.id + '-mode').html('mode: ' + media.pluginType);
+                        }
+                    });
+                })
                 getRelatedVideo(response.data.items[0].id);
-
             }, function errorCallback(response) {
 
             });
@@ -57,7 +63,6 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
                 method: 'GET',
                 url: url
             }).then(function successCallback(response) {
-                console.log(response)
                 $rootScope.video.related = response.data.items
                 angular.forEach($rootScope.video.related, function(value, key) {
                     try{
@@ -134,8 +139,8 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
             if(event.which === 13 || event.type === "blur") {
                 $state.go('home')
                 var data = Youtube.search({ part: 'snippet', q: event.target.name, maxResults: 20, pageToken: $rootScope.pageToken ? $rootScope.pageToken : '', type : 'video'})
-                $timeout(function(){
-                    if(typeof data !="undefined"){
+                var getData = setInterval(function(){
+                    if(typeof data !="undefined" && data['$$state'].value){
                         $rootScope.pageToken = data['$$state'].value.nextPageToken
                         $rootScope.videoList = data['$$state'].value.items;
                         angular.forEach($rootScope.videoList, function(value, key) {
@@ -148,7 +153,8 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
                         $rootScope.$apply();
 
                     }
-                },1000)
+                    clearInterval(getData);
+                },10)
             }
         }
         $scope.videos = function(videoCategoryId){
@@ -191,8 +197,9 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
                     videoCategoryId = 22;
             }
             var data = Youtube.search({ part: 'snippet', maxResults: 20, pageToken: $rootScope.pageToken ? $rootScope.pageToken : '', type : 'video', videoCategoryId: videoCategoryId })
-            $timeout(function(){
-                if(typeof data !="undefined"){
+
+            var getData = setInterval(function(){
+                if(typeof data !="undefined" && data['$$state'].value){
                     $rootScope.pageToken = data['$$state'].value.nextPageToken
                     $rootScope.videoList = data['$$state'].value.items;
                     angular.forEach($rootScope.videoList, function(value, key) {
@@ -204,9 +211,9 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
                         }
                     });
                     $rootScope.$apply();
-
+                    clearInterval(getData);
                 }
-            },1000)
+            },10)
         }
         $scope.videos($stateParams.id ? $stateParams : 22)
 

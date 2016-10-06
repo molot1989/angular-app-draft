@@ -9,7 +9,6 @@ angular.module('videolist',[])
                 attrs.$observe('list', function(value){
                     if(value){
                         scope.list = JSON.parse(value);
-                        console.log(scope.list)
                     }
                 });
             }
