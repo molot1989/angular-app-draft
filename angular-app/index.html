@@ -12,7 +12,7 @@
     <script src="lib/mediaelement.min.js"></script>
     <link rel="stylesheet" href="lib/mediaelementplayer.min.css" />
 </head>
-<body>
+<body ng-controller="videoController">
 <header>
     <div class="container">
         <div class="row">
@@ -23,7 +23,7 @@
             </div>
             <div class="col-md-6 search">
                 <form id="main-search">
-                    <div class="input-group" ng-controller="videoController">
+                    <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
                         <input type="text" class="form-control" placeholder="Enter a keyword and press enter" ng-keypress="search($event)"name="q">
                     </div>

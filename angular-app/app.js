@@ -152,15 +152,17 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
         $rootScope.videoCategoryid=[];
         $rootScope.videoCategoryChannelName='';
 
-        function getView(value){
-            var url = 'https://www.googleapis.com/youtube/v3/videos?part=statistics&id='+value.id.videoId+'&key=AIzaSyDf-M6vHleltxG1jZI_PEn1mzdAT2YnEmo';
+        function getViewChannel(val){
+            var url = 'https://www.googleapis.com/youtube/v3/videos?part=statistics&id='+val.id.videoId+'&key=AIzaSyDf-M6vHleltxG1jZI_PEn1mzdAT2YnEmo';
             $http({
                 method: 'GET',
                 url: url
             }).then(function successCallback(response) {
-                angular.forEach(value, function(value, key) {
+                angular.forEach($rootScope.videoList, function(value, key) {
                     try{
-                        value.statistics = response.data.items[0].statistics;
+                        if(val.id.videoId == value.id.videoId){
+                            value.statistics = response.data.items[0].statistics;
+                        }
                     }catch(e){
 
                     }
@@ -179,7 +181,7 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
                 angular.forEach($rootScope.videoList, function(value, key) {
                     try{
                         value.titleLink = value.snippet.title.replaceAll(' ', '-').replaceAll('/', '');
-                        getView(value)
+                        getViewChannel(value)
                     }catch(e){
 
                     }
@@ -188,7 +190,7 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
         }
         $scope.search = function(q){
             if(event.which === 13 || event.type === "blur") {
-                $state.go('home')
+                $state.go('channel')
                 var data = Youtube.search({ part: 'snippet', q: event.target.name, maxResults: 20, pageToken: $rootScope.pageToken ? $rootScope.pageToken : '', type : 'video'})
                 var getData = setInterval(function(){
                     if(typeof data !="undefined" && data['$$state'].value){
@@ -275,7 +277,26 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
             },10)
             return deferred.promise;
         }
+        function getView(val, index){
+            var url = 'https://www.googleapis.com/youtube/v3/videos?part=statistics&id='+val.id.videoId+'&key=AIzaSyDf-M6vHleltxG1jZI_PEn1mzdAT2YnEmo';
+            $http({
+                method: 'GET',
+                url: url
+            }).then(function successCallback(response) {
+                angular.forEach($rootScope.videoList[index], function(value, key) {
+                    try{
+                        if(val.id.videoId == value.id.videoId){
+                            value.statistics = response.data.items[0].statistics;
+                        }
+                    }catch(e){
 
+                    }
+                });
+            }, function errorCallback(response) {
+
+            });
+
+        }
         $scope.getData = function (arr) {
             if($state.current.name == 'channel'|| $state.current.name == ''){ return ;}
             var tmpObj = arr.shift();
@@ -289,7 +310,7 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
                         angular.forEach($rootScope.videoList[arr.length], function(value, key) {
                             try{
                                 value.titleLink = value.snippet.title.replaceAll(' ', '-').replaceAll('/', '');
-                                getView(value)
+                                getView(value, arr.length)
                             }catch(e){
 
                             }
@@ -311,7 +332,7 @@ angular.module('angularApp', ['ui.router','ngAnimate','videolist','gapi','yaru22
             angular.forEach($rootScope.videoList, function(value, key) {
                 try{
                     value.titleLink = value.snippet.title.replaceAll(' ', '-').replaceAll('/', '');
-                    getView(value);
+                    getViewChannel(value);
                 }catch(e){
 
                 }
