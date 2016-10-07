@@ -2,33 +2,32 @@
     <div class="container">
         <div class="row">
             <div class="col-md-2 col-xs-2 sidebar" ng-controller="channelsCtrl">
-                <h3 class="heading">Channels</h3>
+                <h3 class="heading"><a href="/">Channels</a></h3>
                 <div channels-list="items">
 
                 </div>
             </div>
-
             <div class="col-md-10 content col-xs-10" ng-controller="videoController">
-                <h2 class="header"><a ng-href="/channel/{{videoCategoryid[6]}}">{{videoCategoryName[6]}} Videos</a></h2>
-                <video-list list={{videoList[6]}}></video-list>
+                <h2 class="header"><a ng-href="/channel/{{video.videoCategoryid[6]}}">{{video.categoryName[6]}} Videos</a></h2>
+                <video-list list={{video.list[6]}}></video-list>
 
-                <h2 class="header"><a ng-href="/channel/{{videoCategoryid[5]}}">{{videoCategoryName[5]}} Videos</a></h2>
-                <video-list list={{videoList[5]}}></video-list>
+                <h2 class="header"><a ng-href="/channel/{{video.videoCategoryid[5]}}">{{video.categoryName[5]}} Videos</a></h2>
+                <video-list list={{video.list[5]}}></video-list>
 
-                <h2 class="header"><a ng-href="/channel/{{videoCategoryid[4]}}">{{videoCategoryName[4]}} Videos</a></h2>
-                <video-list list={{videoList[4]}}></video-list>
+                <h2 class="header"><a ng-href="/channel/{{video.videoCategoryid[4]}}">{{video.categoryName[4]}} Videos</a></h2>
+                <video-list list={{video.list[4]}}></video-list>
 
-                <h2 class="header"><a ng-href="/channel/{{videoCategoryid[3]}}">{{videoCategoryName[3]}} Videos</a></h2>
-                <video-list list={{videoList[3]}}></video-list>
+                <h2 class="header"><a ng-href="/channel/{{video.videoCategoryid[3]}}">{{video.categoryName[3]}} Videos</a></h2>
+                <video-list list={{video.list[3]}}></video-list>
 
-                <h2 class="header"><a ng-href="/channel/{{videoCategoryid[2]}}">{{videoCategoryName[2]}} Videos</a></h2>
-                <video-list list={{videoList[2]}}></video-list>
+                <h2 class="header"><a ng-href="/channel/{{video.videoCategoryid[2]}}">{{video.categoryName[2]}} Videos</a></h2>
+                <video-list list={{video.list[2]}}></video-list>
 
-                <h2 class="header"><a ng-href="/channel/{{videoCategoryid[1]}}">{{videoCategoryName[1]}} Videos</a></h2>
-                <video-list list={{videoList[1]}}></video-list>
+                <h2 class="header"><a ng-href="/channel/{{video.videoCategoryid[1]}}">{{video.categoryName[1]}} Videos</a></h2>
+                <video-list list={{video.list[1]}}></video-list>
 
-                <h2 class="header"><a ng-href="/channel/{{videoCategoryid[0]}}">{{videoCategoryName[0]}} Videos</a></h2>
-                <video-list list={{videoList[0]}}></video-list>
+                <h2 class="header"><a ng-href="/channel/{{video.videoCategoryid[0]}}">{{video.categoryName[0]}} Videos</a></h2>
+                <video-list list={{video.list[0]}}></video-list>
 
                 <!--
                 <ul class="pager">

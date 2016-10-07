@@ -20,18 +20,18 @@ gulp.task('compress', function() {
         'node_modules/angular/angular.js',
         'node_modules/angular-ui-router/release/angular-ui-router.js',
         'node_modules/angular-animate/angular-animate.js',
+        'app.js',
         'modules/**/*.js',
-        'app.js'
     ])
         .pipe(concat('app.min.js'))
-        .pipe(uglify())
+        //.pipe(uglify())
         .pipe(gulp.dest('build'));
 });
 
 gulp.task('watch', function() {
+    gulp.watch('app.js', ['compress']);
     gulp.watch('modules/styles/*.scss', ['sass']);
     gulp.watch('modules/**/*.js', ['compress']);
-    gulp.watch('app.js', ['compress']);
 
 });
 

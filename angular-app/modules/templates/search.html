@@ -7,12 +7,12 @@
 
                 </div>
             </div>
-            <div class="col-md-10 content col-xs-10" ng-controller="videoController">
-                <h2 class="header">{{video.categoryName[0]}} Videos</h2>
+            <div class="col-md-10 content col-xs-10" ng-controller="searchController">
+                <h2 class="header">Search Videos</h2>
                 <video-list list={{video.list[0]}}></video-list>
                 <ul class="pager">
                     <li class="next">
-                        <a class="next" ng-click="next()">Next</a>
+                        <a class="next" ng-click="nextSearch()">Next</a>
                     </li>
                 </ul>
             </div>
